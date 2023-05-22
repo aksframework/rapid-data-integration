@@ -1,21 +1,12 @@
 buildscript {
 	ext {
-		jib_version = '3.1.0'
 		spring_boot_version = '2.6.6'
 		spring_dependency_management_version = '1.0.11.RELEASE'
-		sonar_qube_version = '2.7'
 		micrometer_version = '1.5.1'
-		spring_cloud_version = '2021.0.1'
-		gcp_cloud_version = '3.2.0'
-	}
-	dependencies {
-		classpath "kr.motd.gradle:sphinx-gradle-plugin:2.10.1"
-		classpath("com.github.davidmc24.gradle.plugin:gradle-avro-plugin:1.2.0")
 	}
 }
 
 plugins {
-	id "com.google.cloud.tools.jib" version "${jib_version}"
 	id "org.springframework.boot" version "${spring_boot_version}"
 	id "com.gorylenko.gradle-git-properties" version "1.5.1"
 	id "io.spring.dependency-management" version "${spring_dependency_management_version}"
@@ -23,26 +14,17 @@ plugins {
 	id 'java-library'
 	id "maven-publish"
 	id "org.openapi.generator" version "4.2.1"
-	id "org.sonarqube" version "${sonar_qube_version}"
 	id "jacoco"
 	id 'com.github.sherter.google-java-format' version '0.9'
 	id "io.freefair.lombok" version "5.3.3.3"
 	id "io.freefair.aspectj.post-compile-weaving" version "6.5.0.2"
 }
 
-apply plugin: "kr.motd.sphinx"
-
 springBoot {
 	buildInfo()
 }
 
 repositories {
-	maven {
-		url = "https://nexus.mgmt-bld.oncp.dev/repository/maven-public/"
-	}
-	maven {
-		url = "https://nexus.sbs-bld.oncp.dev/repository/shared-services/"
-	}
 	mavenCentral()
 }
 
@@ -77,12 +59,6 @@ dependencies {
 	annotationProcessor "org.projectlombok:lombok"
 }
 
-dependencyManagement {
-	imports {
-		mavenBom "com.google.cloud:spring-cloud-gcp-dependencies:${spring_cloud_gcp_version}"
-	}
-}
-
 configurations.all {
 	exclude module: "spring-boot-starter-logging"
 	exclude module: "logback-classic"
@@ -103,33 +79,11 @@ test {
 	useJUnitPlatform()
 }
 
-sphinx {
-	sourceDirectory = "${projectDir}"
-	outputDirectory = "${project.buildDir}/site"
-}
-
-group = "com.lbg.rsk.cdp"
+group = "com.aks.framework"
 version = "0.0.1-SNAPSHOT"
 sourceCompatibility = "11"
 targetCompatibility = "11"
 
-
-/*publishing {
-	publications {
-		maven(MavenPublication) {
-			from(components.java)
-		}
-	}
-	repositories {
-		maven {
-			url = "https://nexus.sbs-bld.oncp.dev/repository/dmn01-rsk-cdp-common/"
-			credentials {
-				username = System.getenv('USERNAME')
-				password = System.getenv('PASSWORD')
-			}
-		}
-	}
-}*/
 
 jar {
 	enabled = true
