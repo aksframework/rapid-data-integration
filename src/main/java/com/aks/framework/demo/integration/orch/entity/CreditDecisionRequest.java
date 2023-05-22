@@ -1,4 +1,4 @@
-package com.lbg.rsk.cdp.demo.integration.orch.entity;
+package com.aks.framework.demo.integration.orch.entity;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Getter;

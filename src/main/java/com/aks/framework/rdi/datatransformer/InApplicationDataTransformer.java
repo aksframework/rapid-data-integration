@@ -1,4 +1,4 @@
-package com.lbg.rsk.cdp.dataflow.datatransformer;
+package com.aks.framework.rdi.datatransformer;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.integration.store.MessageGroup;

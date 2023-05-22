@@ -1,4 +1,4 @@
-package com.lbg.rsk.cdp.dataflow.retry;
+package com.aks.framework.rdi.retry;
 
 import java.io.IOException;
 import org.springframework.messaging.MessagingException;

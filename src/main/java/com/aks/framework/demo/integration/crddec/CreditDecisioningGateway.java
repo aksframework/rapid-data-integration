@@ -1,4 +1,4 @@
-package com.lbg.rsk.cdp.demo.integration.crddec;
+package com.aks.framework.demo.integration.crddec;
 
 import org.springframework.integration.annotation.Gateway;
 import org.springframework.integration.annotation.MessagingGateway;

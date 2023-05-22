@@ -1,6 +1,6 @@
-package com.lbg.rsk.cdp.demo.integration;
+package com.aks.framework.demo.integration;
 
-import com.lbg.rsk.cdp.dataflow.apiexecutor.APIExecutorException;
+import com.aks.framework.rdi.apiexecutor.APIExecutorException;
 import java.util.function.BiFunction;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;

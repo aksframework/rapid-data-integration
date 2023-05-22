@@ -1,20 +1,20 @@
-package com.lbg.rsk.cdp.dataflow.dbexecutor;
+package com.aks.framework.rdi.dbexecutor;
 
-import static com.lbg.rsk.cdp.dataflow.base.DataFlowUtils.createChannel;
-import static com.lbg.rsk.cdp.dataflow.base.MapperUtils.convertToJson;
+import static com.aks.framework.rdi.base.DataFlowUtils.createChannel;
+import static com.aks.framework.rdi.base.MapperUtils.convertToJson;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.lbg.rsk.cdp.dataflow.annotations.RequestTransformer;
-import com.lbg.rsk.cdp.dataflow.annotations.ResponseTransformer;
-import com.lbg.rsk.cdp.dataflow.apiexecutor.custom.AddEnrichHeader;
-import com.lbg.rsk.cdp.dataflow.base.BeanUtils;
-import com.lbg.rsk.cdp.dataflow.base.DataFlowBaseExecutor;
-import com.lbg.rsk.cdp.dataflow.base.DataFlowConfig.DBExecutorConfig;
-import com.lbg.rsk.cdp.dataflow.base.DataFlowConstants;
-import com.lbg.rsk.cdp.dataflow.base.DataFlowConstants.SPEC_TYPE;
-import com.lbg.rsk.cdp.dataflow.base.DefaultTransformer;
-import com.lbg.rsk.cdp.dataflow.base.MapperUtils;
-import com.lbg.rsk.cdp.dataflow.datatransformer.PayloadTransformer;
+import com.aks.framework.rdi.annotations.RequestTransformer;
+import com.aks.framework.rdi.annotations.ResponseTransformer;
+import com.aks.framework.rdi.apiexecutor.custom.AddEnrichHeader;
+import com.aks.framework.rdi.base.BeanUtils;
+import com.aks.framework.rdi.base.DataFlowBaseExecutor;
+import com.aks.framework.rdi.base.DataFlowConfig.DBExecutorConfig;
+import com.aks.framework.rdi.base.DataFlowConstants;
+import com.aks.framework.rdi.base.DataFlowConstants.SPEC_TYPE;
+import com.aks.framework.rdi.base.DefaultTransformer;
+import com.aks.framework.rdi.base.MapperUtils;
+import com.aks.framework.rdi.datatransformer.PayloadTransformer;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;

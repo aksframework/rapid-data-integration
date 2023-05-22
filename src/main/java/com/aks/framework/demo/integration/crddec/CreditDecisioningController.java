@@ -1,4 +1,4 @@
-package com.lbg.rsk.cdp.demo.integration.crddec;
+package com.aks.framework.demo.integration.crddec;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,6 +1,6 @@
-package com.lbg.rsk.cdp.dataflow.datagatherer;
+package com.aks.framework.rdi.datagatherer;
 
-import com.lbg.rsk.cdp.dataflow.base.BeanUtils;
+import com.aks.framework.rdi.base.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

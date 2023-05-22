@@ -29,7 +29,7 @@ dataFlowPayloadTransformer:
       - clientid,'wrwfdcwqcwqewqcewqc'
       - secret,'32432c23h8e23he23gc2378er2342378cg32487324c32874c32784ct32478c378'
   decisionRequestEntityCreator:
-    expression-spec: "new com.lbg.rsk.cdp.demo.integration.crddec.entity.DecisionRequestEntity()"
+    expression-spec: "new com.aks.framework.demo.integration.crddec.entity.DecisionRequestEntity()"
     replace-with:
       - crdRqsId,headers.cerdos-id
       - applicationCustomerId,payload.applicationCustomerId

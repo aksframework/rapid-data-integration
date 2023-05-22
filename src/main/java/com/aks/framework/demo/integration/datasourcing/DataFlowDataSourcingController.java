@@ -1,4 +1,4 @@
-package com.lbg.rsk.cdp.demo.integration.datasourcing;
+package com.aks.framework.demo.integration.datasourcing;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package com.lbg.rsk.cdp.dataflow.apiexecutor;
+package com.aks.framework.rdi.apiexecutor;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.AllArgsConstructor;

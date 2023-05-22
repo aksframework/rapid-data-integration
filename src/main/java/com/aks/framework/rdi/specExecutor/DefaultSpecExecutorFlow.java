@@ -1,8 +1,8 @@
-package com.lbg.rsk.cdp.dataflow.specExecutor;
+package com.aks.framework.rdi.specExecutor;
 
-import static com.lbg.rsk.cdp.dataflow.base.DataFlowUtils.createChannel;
+import static com.aks.framework.rdi.base.DataFlowUtils.createChannel;
 
-import com.lbg.rsk.cdp.dataflow.base.DataFlowConstants;
+import com.aks.framework.rdi.base.DataFlowConstants;
 import org.springframework.integration.dsl.IntegrationFlowDefinition;
 
 public class DefaultSpecExecutorFlow extends AbstractSpecExecutorFlow {

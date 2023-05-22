@@ -1,8 +1,8 @@
-package com.lbg.rsk.cdp.dataflow.apiexecutor;
+package com.aks.framework.rdi.apiexecutor;
 
-import static com.lbg.rsk.cdp.dataflow.base.DataFlowUtils.createChannel;
+import static com.aks.framework.rdi.base.DataFlowUtils.createChannel;
 
-import com.lbg.rsk.cdp.dataflow.base.DataFlowConstants;
+import com.aks.framework.rdi.base.DataFlowConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.integration.dsl.IntegrationFlowDefinition;
 

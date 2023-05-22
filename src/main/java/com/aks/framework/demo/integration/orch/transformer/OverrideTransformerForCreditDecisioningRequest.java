@@ -1,10 +1,10 @@
-package com.lbg.rsk.cdp.demo.integration.orch.transformer;
+package com.aks.framework.demo.integration.orch.transformer;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.lbg.rsk.cdp.dataflow.apiexecutor.APIFlowData;
-import com.lbg.rsk.cdp.dataflow.apiexecutor.custom.RequestOverrideTransformer;
-import com.lbg.rsk.cdp.dataflow.base.MapperUtils;
-import com.lbg.rsk.cdp.demo.integration.orch.entity.CreditDecisionRequest;
+import com.aks.framework.rdi.apiexecutor.APIFlowData;
+import com.aks.framework.rdi.apiexecutor.custom.RequestOverrideTransformer;
+import com.aks.framework.rdi.base.MapperUtils;
+import com.aks.framework.demo.integration.orch.entity.CreditDecisionRequest;
 import java.util.Map;
 import org.springframework.stereotype.Component;
 

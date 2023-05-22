@@ -1,9 +1,9 @@
-package com.lbg.rsk.cdp.demo.integration.datasourcing.transformer;
+package com.aks.framework.demo.integration.datasourcing.transformer;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.lbg.rsk.cdp.dataflow.base.MapperUtils;
-import com.lbg.rsk.cdp.dataflow.datatransformer.DataGathererUtils;
-import com.lbg.rsk.cdp.dataflow.datatransformer.InApplicationDataTransformer;
+import com.aks.framework.rdi.base.MapperUtils;
+import com.aks.framework.rdi.datatransformer.DataGathererUtils;
+import com.aks.framework.rdi.datatransformer.InApplicationDataTransformer;
 import java.util.Map;
 import org.springframework.integration.store.MessageGroup;
 import org.springframework.messaging.MessageHeaders;

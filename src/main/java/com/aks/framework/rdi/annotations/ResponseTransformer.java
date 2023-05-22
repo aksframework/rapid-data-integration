@@ -1,4 +1,4 @@
-package com.lbg.rsk.cdp.dataflow.annotations;
+package com.aks.framework.rdi.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

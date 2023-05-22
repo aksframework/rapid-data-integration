@@ -1,10 +1,10 @@
-package com.lbg.rsk.cdp.demo.integration.crddec.executor;
+package com.aks.framework.demo.integration.crddec.executor;
 
-import com.lbg.rsk.cdp.dataflow.annotations.DataFlowAPIExecutor;
-import com.lbg.rsk.cdp.dataflow.annotations.OnResponse;
-import com.lbg.rsk.cdp.dataflow.apiexecutor.AbstractAPIExecutor;
-import com.lbg.rsk.cdp.dataflow.apiexecutor.DefaultAPIExecutorFlow;
-import com.lbg.rsk.cdp.dataflow.apiexecutor.custom.AddEnrichHeader;
+import com.aks.framework.rdi.annotations.DataFlowAPIExecutor;
+import com.aks.framework.rdi.annotations.OnResponse;
+import com.aks.framework.rdi.apiexecutor.AbstractAPIExecutor;
+import com.aks.framework.rdi.apiexecutor.DefaultAPIExecutorFlow;
+import com.aks.framework.rdi.apiexecutor.custom.AddEnrichHeader;
 import org.springframework.integration.dsl.HeaderEnricherSpec;
 import org.springframework.stereotype.Component;
 

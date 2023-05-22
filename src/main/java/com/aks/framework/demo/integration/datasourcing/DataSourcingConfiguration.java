@@ -1,9 +1,9 @@
-package com.lbg.rsk.cdp.demo.integration.datasourcing;
+package com.aks.framework.demo.integration.datasourcing;
 
-import com.lbg.rsk.cdp.demo.integration.datasourcing.executor.DataFlowNcinoAPIExecutor;
-import com.lbg.rsk.cdp.demo.integration.datasourcing.executor.DataFlowSOEAPIExecutor;
-import com.lbg.rsk.cdp.demo.integration.datasourcing.executor.DataSourcingDataGatherer;
-import com.lbg.rsk.cdp.demo.integration.datasourcing.executor.InitialBomSpecExecutor;
+import com.aks.framework.demo.integration.datasourcing.executor.DataFlowNcinoAPIExecutor;
+import com.aks.framework.demo.integration.datasourcing.executor.DataFlowSOEAPIExecutor;
+import com.aks.framework.demo.integration.datasourcing.executor.DataSourcingDataGatherer;
+import com.aks.framework.demo.integration.datasourcing.executor.InitialBomSpecExecutor;
 import java.util.concurrent.Executors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
-package com.lbg.rsk.cdp.dataflow.annotations;
+package com.aks.framework.rdi.annotations;
 
-import com.lbg.rsk.cdp.dataflow.specExecutor.AbstractSpecExecutorFlow;
+import com.aks.framework.rdi.specExecutor.AbstractSpecExecutorFlow;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

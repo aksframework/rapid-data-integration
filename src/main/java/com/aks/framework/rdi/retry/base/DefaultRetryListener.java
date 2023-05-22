@@ -1,6 +1,6 @@
-package com.lbg.rsk.cdp.dataflow.retry.base;
+package com.aks.framework.rdi.retry.base;
 
-import com.lbg.rsk.cdp.dataflow.base.DataFlowConstants;
+import com.aks.framework.rdi.base.DataFlowConstants;
 import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.retry.RetryCallback;

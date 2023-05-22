@@ -1,4 +1,4 @@
-package com.lbg.rsk.cdp.dataflow.execption;
+package com.aks.framework.rdi.execption;
 
 public class InternalServerErrorException extends DataFlowException {
   private static final long serialVersionUID = 1L;

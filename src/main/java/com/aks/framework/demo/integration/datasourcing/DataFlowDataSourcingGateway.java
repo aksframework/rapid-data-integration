@@ -1,4 +1,4 @@
-package com.lbg.rsk.cdp.demo.integration.datasourcing;
+package com.aks.framework.demo.integration.datasourcing;
 
 import org.springframework.integration.annotation.Gateway;
 import org.springframework.integration.annotation.MessagingGateway;

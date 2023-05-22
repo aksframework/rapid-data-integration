@@ -1,4 +1,4 @@
-package com.lbg.rsk.cdp.dataflow.base;
+package com.aks.framework.rdi.base;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

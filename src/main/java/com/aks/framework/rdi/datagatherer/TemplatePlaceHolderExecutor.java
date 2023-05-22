@@ -1,13 +1,13 @@
-package com.lbg.rsk.cdp.dataflow.datagatherer;
+package com.aks.framework.rdi.datagatherer;
 
-import static com.lbg.rsk.cdp.dataflow.base.DataFlowConstants.ROOT_OBJECT_PARENTHESIS;
-import static com.lbg.rsk.cdp.dataflow.datatransformer.DataGathererUtils.convertForTraversal;
+import static com.aks.framework.rdi.base.DataFlowConstants.ROOT_OBJECT_PARENTHESIS;
+import static com.aks.framework.rdi.datatransformer.DataGathererUtils.convertForTraversal;
 
 import com.bazaarvoice.jolt.common.Optional;
 import com.bazaarvoice.jolt.traversr.SimpleTraversal;
-import com.lbg.rsk.cdp.dataflow.base.DataFlowConfig.PlaceHolder;
-import com.lbg.rsk.cdp.dataflow.base.DataFlowConstants;
-import com.lbg.rsk.cdp.dataflow.datatransformer.DataGathererUtils;
+import com.aks.framework.rdi.base.DataFlowConfig.PlaceHolder;
+import com.aks.framework.rdi.base.DataFlowConstants;
+import com.aks.framework.rdi.datatransformer.DataGathererUtils;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;

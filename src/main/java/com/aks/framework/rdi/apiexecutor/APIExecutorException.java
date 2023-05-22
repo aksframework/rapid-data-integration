@@ -1,6 +1,6 @@
-package com.lbg.rsk.cdp.dataflow.apiexecutor;
+package com.aks.framework.rdi.apiexecutor;
 
-import com.lbg.rsk.cdp.dataflow.execption.InternalServerErrorException;
+import com.aks.framework.rdi.execption.InternalServerErrorException;
 
 /** The type Api executor exception. */
 public class APIExecutorException extends InternalServerErrorException {

@@ -1,4 +1,4 @@
-package com.lbg.rsk.cdp.dataflow.apiexecutor.custom;
+package com.aks.framework.rdi.apiexecutor.custom;
 
 import org.springframework.integration.dsl.MessageHandlerSpec;
 import org.springframework.messaging.Message;

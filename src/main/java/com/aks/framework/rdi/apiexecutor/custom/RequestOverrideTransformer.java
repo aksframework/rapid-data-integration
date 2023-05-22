@@ -1,7 +1,7 @@
-package com.lbg.rsk.cdp.dataflow.apiexecutor.custom;
+package com.aks.framework.rdi.apiexecutor.custom;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.lbg.rsk.cdp.dataflow.apiexecutor.APIFlowData;
+import com.aks.framework.rdi.apiexecutor.APIFlowData;
 import java.util.Map;
 import org.springframework.messaging.handler.annotation.Headers;
 

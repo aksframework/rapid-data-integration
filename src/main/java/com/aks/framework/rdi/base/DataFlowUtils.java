@@ -1,4 +1,4 @@
-package com.lbg.rsk.cdp.dataflow.base;
+package com.aks.framework.rdi.base;
 
 public class DataFlowUtils {
   public static String createChannel(String dataFlowName, String channelType) {

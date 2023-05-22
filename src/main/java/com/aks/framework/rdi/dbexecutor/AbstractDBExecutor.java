@@ -1,9 +1,9 @@
-package com.lbg.rsk.cdp.dataflow.dbexecutor;
+package com.aks.framework.rdi.dbexecutor;
 
-import com.lbg.rsk.cdp.dataflow.annotations.DataFlowDBExecutor;
-import com.lbg.rsk.cdp.dataflow.apiexecutor.AbstractBaseExecutorFlow;
-import com.lbg.rsk.cdp.dataflow.base.AbstractBaseExecutor;
-import com.lbg.rsk.cdp.dataflow.base.GenerateTypeBean;
+import com.aks.framework.rdi.annotations.DataFlowDBExecutor;
+import com.aks.framework.rdi.apiexecutor.AbstractBaseExecutorFlow;
+import com.aks.framework.rdi.base.AbstractBaseExecutor;
+import com.aks.framework.rdi.base.GenerateTypeBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.integration.dsl.IntegrationFlowDefinition;
 import org.springframework.util.Assert;

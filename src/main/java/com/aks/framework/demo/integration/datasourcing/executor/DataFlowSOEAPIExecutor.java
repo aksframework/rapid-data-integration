@@ -1,9 +1,9 @@
-package com.lbg.rsk.cdp.demo.integration.datasourcing.executor;
+package com.aks.framework.demo.integration.datasourcing.executor;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.lbg.rsk.cdp.dataflow.annotations.DataFlowAPIExecutor;
-import com.lbg.rsk.cdp.dataflow.apiexecutor.AbstractAPIExecutor;
-import com.lbg.rsk.cdp.dataflow.apiexecutor.ConcurrentAPIExecutorFlow;
+import com.aks.framework.rdi.annotations.DataFlowAPIExecutor;
+import com.aks.framework.rdi.apiexecutor.AbstractAPIExecutor;
+import com.aks.framework.rdi.apiexecutor.ConcurrentAPIExecutorFlow;
 import java.util.List;
 import org.springframework.integration.annotation.Splitter;
 import org.springframework.stereotype.Component;

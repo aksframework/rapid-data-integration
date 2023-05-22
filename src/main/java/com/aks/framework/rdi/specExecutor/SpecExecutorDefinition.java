@@ -1,13 +1,13 @@
-package com.lbg.rsk.cdp.dataflow.specExecutor;
+package com.aks.framework.rdi.specExecutor;
 
-import static com.lbg.rsk.cdp.dataflow.base.DataFlowUtils.createChannel;
+import static com.aks.framework.rdi.base.DataFlowUtils.createChannel;
 
-import com.lbg.rsk.cdp.dataflow.base.BeanUtils;
-import com.lbg.rsk.cdp.dataflow.base.DataFlowBaseExecutor;
-import com.lbg.rsk.cdp.dataflow.base.DataFlowConfig;
-import com.lbg.rsk.cdp.dataflow.base.DataFlowConstants;
-import com.lbg.rsk.cdp.dataflow.base.DefaultTransformer;
-import com.lbg.rsk.cdp.dataflow.base.MapperUtils;
+import com.aks.framework.rdi.base.BeanUtils;
+import com.aks.framework.rdi.base.DataFlowBaseExecutor;
+import com.aks.framework.rdi.base.DataFlowConfig;
+import com.aks.framework.rdi.base.DataFlowConstants;
+import com.aks.framework.rdi.base.DefaultTransformer;
+import com.aks.framework.rdi.base.MapperUtils;
 import java.util.Map;
 import javax.validation.constraints.NotNull;
 import org.springframework.integration.dsl.IntegrationFlowExtension;

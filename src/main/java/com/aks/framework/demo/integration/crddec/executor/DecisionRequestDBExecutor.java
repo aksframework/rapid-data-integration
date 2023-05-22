@@ -1,10 +1,10 @@
-package com.lbg.rsk.cdp.demo.integration.crddec.executor;
+package com.aks.framework.demo.integration.crddec.executor;
 
-import com.lbg.rsk.cdp.dataflow.annotations.DataFlowDBExecutor;
-import com.lbg.rsk.cdp.dataflow.dbexecutor.AbstractDBExecutor;
-import com.lbg.rsk.cdp.dataflow.dbexecutor.DefaultDBExecutorFlow;
-import com.lbg.rsk.cdp.demo.integration.crddec.entity.DecisionRequestEntity;
-import com.lbg.rsk.cdp.demo.integration.crddec.entity.DecisionRequestRepository;
+import com.aks.framework.rdi.annotations.DataFlowDBExecutor;
+import com.aks.framework.rdi.dbexecutor.AbstractDBExecutor;
+import com.aks.framework.rdi.dbexecutor.DefaultDBExecutorFlow;
+import com.aks.framework.demo.integration.crddec.entity.DecisionRequestEntity;
+import com.aks.framework.demo.integration.crddec.entity.DecisionRequestRepository;
 import org.springframework.stereotype.Component;
 
 @Component

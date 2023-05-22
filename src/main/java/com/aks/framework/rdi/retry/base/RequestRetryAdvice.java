@@ -1,4 +1,4 @@
-package com.lbg.rsk.cdp.dataflow.retry.base;
+package com.aks.framework.rdi.retry.base;
 
 import org.springframework.integration.handler.advice.RequestHandlerRetryAdvice;
 

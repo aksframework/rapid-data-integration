@@ -1,4 +1,4 @@
-package com.lbg.rsk.cdp.demo.integration;
+package com.aks.framework.demo.integration;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

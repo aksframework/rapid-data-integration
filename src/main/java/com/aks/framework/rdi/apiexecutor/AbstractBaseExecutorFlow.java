@@ -1,12 +1,12 @@
-package com.lbg.rsk.cdp.dataflow.apiexecutor;
+package com.aks.framework.rdi.apiexecutor;
 
-import static com.lbg.rsk.cdp.dataflow.base.DataFlowUtils.createChannel;
+import static com.aks.framework.rdi.base.DataFlowUtils.createChannel;
 
-import com.lbg.rsk.cdp.dataflow.base.BeanUtils;
-import com.lbg.rsk.cdp.dataflow.base.DataFlowBaseExecutor;
-import com.lbg.rsk.cdp.dataflow.base.DataFlowConfig;
-import com.lbg.rsk.cdp.dataflow.base.DataFlowConstants;
-import com.lbg.rsk.cdp.dataflow.dbexecutor.DBExecutor;
+import com.aks.framework.rdi.base.BeanUtils;
+import com.aks.framework.rdi.base.DataFlowBaseExecutor;
+import com.aks.framework.rdi.base.DataFlowConfig;
+import com.aks.framework.rdi.base.DataFlowConstants;
+import com.aks.framework.rdi.dbexecutor.DBExecutor;
 import java.util.Objects;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;

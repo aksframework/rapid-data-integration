@@ -27,7 +27,7 @@ dataFlowDataGatherer:
       - /{},creditdecision,{}
 dataFlowPayloadTransformer:
   callerRequestEntityCreator:
-    expression-spec: "new com.lbg.rsk.cdp.demo.integration.orch.entity.CallerRequestEntity()"
+    expression-spec: "new com.aks.framework.demo.integration.orch.entity.CallerRequestEntity()"
     replace-with:
       - crdRqsId,headers.cerdos-id
       - applicationCustomerId,payload.LendingGroup.LendingGroupMembers.[0].EntityId

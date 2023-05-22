@@ -1,4 +1,4 @@
-package com.lbg.rsk.cdp.demo.integration.crddec.entity;
+package com.aks.framework.demo.integration.crddec.entity;
 
 import java.time.OffsetDateTime;
 import javax.persistence.Column;

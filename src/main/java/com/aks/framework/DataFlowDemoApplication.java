@@ -1,4 +1,4 @@
-package com.lbg.rsk.cdp;
+package com.aks.framework;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,6 +1,6 @@
-package com.lbg.rsk.cdp.dataflow.retry.base;
+package com.aks.framework.rdi.retry.base;
 
-import com.lbg.rsk.cdp.dataflow.retry.RetryForExceptionEnum;
+import com.aks.framework.rdi.retry.RetryForExceptionEnum;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;

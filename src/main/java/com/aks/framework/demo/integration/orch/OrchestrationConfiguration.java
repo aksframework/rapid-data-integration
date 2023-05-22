@@ -1,10 +1,10 @@
-package com.lbg.rsk.cdp.demo.integration.orch;
+package com.aks.framework.demo.integration.orch;
 
-import com.lbg.rsk.cdp.demo.integration.orch.executor.CallerRequestDBExecutor;
-import com.lbg.rsk.cdp.demo.integration.orch.executor.CallerResponseDBExecutor;
-import com.lbg.rsk.cdp.demo.integration.orch.executor.CreditDecisioningAPIExecutor;
-import com.lbg.rsk.cdp.demo.integration.orch.executor.DataSourcingAPIExecutor;
-import com.lbg.rsk.cdp.demo.integration.orch.executor.OrchSMERenewalGatherer;
+import com.aks.framework.demo.integration.orch.executor.CallerRequestDBExecutor;
+import com.aks.framework.demo.integration.orch.executor.CallerResponseDBExecutor;
+import com.aks.framework.demo.integration.orch.executor.CreditDecisioningAPIExecutor;
+import com.aks.framework.demo.integration.orch.executor.DataSourcingAPIExecutor;
+import com.aks.framework.demo.integration.orch.executor.OrchSMERenewalGatherer;
 import java.util.concurrent.Executors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

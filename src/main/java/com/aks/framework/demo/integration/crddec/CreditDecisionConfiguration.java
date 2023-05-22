@@ -1,10 +1,10 @@
-package com.lbg.rsk.cdp.demo.integration.crddec;
+package com.aks.framework.demo.integration.crddec;
 
-import com.lbg.rsk.cdp.demo.integration.crddec.executor.CrdDecDataGatherer;
-import com.lbg.rsk.cdp.demo.integration.crddec.executor.DecisionRequestDBExecutor;
-import com.lbg.rsk.cdp.demo.integration.crddec.executor.DecisionResponseDBExecutor;
-import com.lbg.rsk.cdp.demo.integration.crddec.executor.FicoAPIExecutor;
-import com.lbg.rsk.cdp.demo.integration.crddec.executor.JwtTokenAPIExecutor;
+import com.aks.framework.demo.integration.crddec.executor.CrdDecDataGatherer;
+import com.aks.framework.demo.integration.crddec.executor.DecisionRequestDBExecutor;
+import com.aks.framework.demo.integration.crddec.executor.DecisionResponseDBExecutor;
+import com.aks.framework.demo.integration.crddec.executor.FicoAPIExecutor;
+import com.aks.framework.demo.integration.crddec.executor.JwtTokenAPIExecutor;
 import java.util.concurrent.Executors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

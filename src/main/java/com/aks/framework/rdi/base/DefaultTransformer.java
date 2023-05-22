@@ -1,4 +1,4 @@
-package com.lbg.rsk.cdp.dataflow.base;
+package com.aks.framework.rdi.base;
 
 import com.bazaarvoice.jolt.Chainr;
 import com.bazaarvoice.jolt.JsonUtils;

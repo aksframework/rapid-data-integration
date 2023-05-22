@@ -1,4 +1,4 @@
-package com.lbg.rsk.cdp.demo.integration.orch;
+package com.aks.framework.demo.integration.orch;
 
 import org.springframework.integration.annotation.Gateway;
 import org.springframework.integration.annotation.MessagingGateway;

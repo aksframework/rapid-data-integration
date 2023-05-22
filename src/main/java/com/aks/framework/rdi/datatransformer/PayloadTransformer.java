@@ -1,8 +1,8 @@
-package com.lbg.rsk.cdp.dataflow.datatransformer;
+package com.aks.framework.rdi.datatransformer;
 
-import com.lbg.rsk.cdp.dataflow.base.BeanUtils;
-import com.lbg.rsk.cdp.dataflow.base.DataFlowConfig.PayloadTransformerConfig;
-import com.lbg.rsk.cdp.dataflow.base.MapperUtils;
+import com.aks.framework.rdi.base.BeanUtils;
+import com.aks.framework.rdi.base.DataFlowConfig.PayloadTransformerConfig;
+import com.aks.framework.rdi.base.MapperUtils;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;

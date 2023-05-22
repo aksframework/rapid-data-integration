@@ -1,10 +1,10 @@
-package com.lbg.rsk.cdp.dataflow.base;
+package com.aks.framework.rdi.base;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.benmanes.caffeine.cache.Cache;
-import com.lbg.rsk.cdp.dataflow.apiexecutor.custom.RequestOverrideTransformer;
-import com.lbg.rsk.cdp.dataflow.base.DataFlowConfig.WebClientConfig;
-import com.lbg.rsk.cdp.dataflow.datatransformer.InApplicationDataTransformer;
+import com.aks.framework.rdi.apiexecutor.custom.RequestOverrideTransformer;
+import com.aks.framework.rdi.base.DataFlowConfig.WebClientConfig;
+import com.aks.framework.rdi.datatransformer.InApplicationDataTransformer;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.util.HashMap;

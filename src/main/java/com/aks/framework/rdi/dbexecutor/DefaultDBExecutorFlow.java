@@ -1,9 +1,9 @@
-package com.lbg.rsk.cdp.dataflow.dbexecutor;
+package com.aks.framework.rdi.dbexecutor;
 
-import static com.lbg.rsk.cdp.dataflow.base.DataFlowUtils.createChannel;
+import static com.aks.framework.rdi.base.DataFlowUtils.createChannel;
 
-import com.lbg.rsk.cdp.dataflow.base.DataFlowBaseExecutor;
-import com.lbg.rsk.cdp.dataflow.base.DataFlowConstants;
+import com.aks.framework.rdi.base.DataFlowBaseExecutor;
+import com.aks.framework.rdi.base.DataFlowConstants;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.integration.dsl.IntegrationFlowDefinition;
 

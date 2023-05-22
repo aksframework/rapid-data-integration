@@ -1,7 +1,7 @@
-package com.lbg.rsk.cdp.dataflow.retry.base;
+package com.aks.framework.rdi.retry.base;
 
-import com.lbg.rsk.cdp.dataflow.base.DataFlowConfig;
-import com.lbg.rsk.cdp.dataflow.base.DataFlowConstants;
+import com.aks.framework.rdi.base.DataFlowConfig;
+import com.aks.framework.rdi.base.DataFlowConstants;
 import java.util.function.Supplier;
 import org.springframework.integration.handler.advice.RequestHandlerRetryAdvice;
 import org.springframework.retry.RetryCallback;

@@ -1,4 +1,4 @@
-package com.lbg.rsk.cdp.dataflow.base;
+package com.aks.framework.rdi.base;
 
 import static java.util.stream.Collectors.toList;
 

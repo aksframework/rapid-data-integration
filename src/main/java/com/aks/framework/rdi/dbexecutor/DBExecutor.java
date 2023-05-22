@@ -1,6 +1,6 @@
-package com.lbg.rsk.cdp.dataflow.dbexecutor;
+package com.aks.framework.rdi.dbexecutor;
 
-import com.lbg.rsk.cdp.dataflow.base.DataFlowBaseExecutor;
+import com.aks.framework.rdi.base.DataFlowBaseExecutor;
 
 /** The interface DBExecutorConfig. */
 public interface DBExecutor extends DataFlowBaseExecutor {}

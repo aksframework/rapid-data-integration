@@ -1,4 +1,4 @@
-package com.lbg.rsk.cdp.dataflow.execption;
+package com.aks.framework.rdi.execption;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

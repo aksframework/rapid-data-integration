@@ -1,17 +1,17 @@
-package com.lbg.rsk.cdp.dataflow.datatransformer;
+package com.aks.framework.rdi.datatransformer;
 
-import static com.lbg.rsk.cdp.dataflow.base.DataFlowConstants.ROOT_OBJECT_PARENTHESIS;
-import static com.lbg.rsk.cdp.dataflow.datatransformer.DataGathererUtils.convertForTraversal;
+import static com.aks.framework.rdi.base.DataFlowConstants.ROOT_OBJECT_PARENTHESIS;
+import static com.aks.framework.rdi.datatransformer.DataGathererUtils.convertForTraversal;
 
 import com.bazaarvoice.jolt.common.Optional;
 import com.bazaarvoice.jolt.traversr.SimpleTraversal;
-import com.lbg.rsk.cdp.dataflow.base.DataFlowConfig.DataTransformerConfig;
-import com.lbg.rsk.cdp.dataflow.base.DataFlowConfig.ExpressionTraversalPath;
-import com.lbg.rsk.cdp.dataflow.base.DataFlowConfig.MapTraversalPath;
-import com.lbg.rsk.cdp.dataflow.base.DataFlowConfig.MatchTraversalPath;
-import com.lbg.rsk.cdp.dataflow.base.DataFlowConfig.TraversalPath;
-import com.lbg.rsk.cdp.dataflow.base.DataFlowConstants;
-import com.lbg.rsk.cdp.dataflow.base.MapperUtils;
+import com.aks.framework.rdi.base.DataFlowConfig.DataTransformerConfig;
+import com.aks.framework.rdi.base.DataFlowConfig.ExpressionTraversalPath;
+import com.aks.framework.rdi.base.DataFlowConfig.MapTraversalPath;
+import com.aks.framework.rdi.base.DataFlowConfig.MatchTraversalPath;
+import com.aks.framework.rdi.base.DataFlowConfig.TraversalPath;
+import com.aks.framework.rdi.base.DataFlowConstants;
+import com.aks.framework.rdi.base.MapperUtils;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;

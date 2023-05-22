@@ -1,5 +1,5 @@
-package com.lbg.rsk.cdp.dataflow.specExecutor;
+package com.aks.framework.rdi.specExecutor;
 
-import com.lbg.rsk.cdp.dataflow.base.DataFlowBaseExecutor;
+import com.aks.framework.rdi.base.DataFlowBaseExecutor;
 
 public interface SpecExecutor extends DataFlowBaseExecutor {}

@@ -1,7 +1,7 @@
-package com.lbg.rsk.cdp.dataflow.specExecutor;
+package com.aks.framework.rdi.specExecutor;
 
-import com.lbg.rsk.cdp.dataflow.apiexecutor.AbstractBaseExecutorFlow;
-import com.lbg.rsk.cdp.dataflow.base.DataFlowBaseExecutor;
+import com.aks.framework.rdi.apiexecutor.AbstractBaseExecutorFlow;
+import com.aks.framework.rdi.base.DataFlowBaseExecutor;
 
 public abstract class AbstractSpecExecutorFlow extends AbstractBaseExecutorFlow {
 

@@ -1,6 +1,6 @@
-package com.lbg.rsk.cdp.dataflow.apiexecutor.custom;
+package com.aks.framework.rdi.apiexecutor.custom;
 
-import com.lbg.rsk.cdp.dataflow.retry.base.RequestRetryAdvice;
+import com.aks.framework.rdi.retry.base.RequestRetryAdvice;
 
 /** The interface Add request retry advice. */
 public interface AddRequestRetryAdvice {

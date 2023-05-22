@@ -1,7 +1,7 @@
-package com.lbg.rsk.cdp.demo.integration.crddec.executor;
+package com.aks.framework.demo.integration.crddec.executor;
 
-import com.lbg.rsk.cdp.dataflow.annotations.DataFlowGatherer;
-import com.lbg.rsk.cdp.dataflow.datagatherer.AbstractDataFlowGatherer;
+import com.aks.framework.rdi.annotations.DataFlowGatherer;
+import com.aks.framework.rdi.datagatherer.AbstractDataFlowGatherer;
 import org.springframework.stereotype.Component;
 
 /** The type DecisionDataGatherer. */
