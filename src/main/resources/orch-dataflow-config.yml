@@ -1,0 +1,44 @@
+dataFlowDBExecutor:
+  callerrequest:
+    entity-class: CallerRequestEntity
+    request-payload-transformer: callerRequestEntityCreator
+  callerresponse:
+    entity-class: CallerResponseEntity
+    response-payload-transformer: entityToCallerResponse
+dataFlowAPIExecutor:
+  datasourcing:
+    api-url: http://localhost:8080/dataflow/data-sourcing/
+    http-method: POST
+    request-header-mappers: cerdos-id
+  creditdecision:
+    api-url: http://localhost:8080/dataflow/credit-decisioning/
+    http-method: POST
+    request-header-mappers: cerdos-id
+    response-spec: /fico-to-caller-spec.json
+    pre-executor: dataSourcingAPIExecutor
+    pre-executor-override: false
+    pre-executor-transformer-class: overrideTransformerForCreditDecisioningRequest
+    post-executor: callerResponseDBExecutor
+    post-executor-override: false
+    post-executor-transformer-class: creditDecisionResponseInDsorTransformer
+dataFlowDataGatherer:
+  smeRenewalGatherer:
+    template-placeholders:
+      - /{},creditdecision,{}
+dataFlowPayloadTransformer:
+  callerRequestEntityCreator:
+    expression-spec: "new com.lbg.rsk.cdp.demo.integration.orch.entity.CallerRequestEntity()"
+    replace-with:
+      - crdRqsId,headers.cerdos-id
+      - applicationCustomerId,payload.LendingGroup.LendingGroupMembers.[0].EntityId
+      - strategyType,payload.RequestType
+      - channelType,payload.ConsumingApplicationChannelTypeID
+    replace-fixed:
+      - customerSegmentType,'SME'
+      - dbRequestType,'ficoRequest'
+    replace-with-type:
+      - payload,payload,"new com.fasterxml.jackson.databind.ObjectMapper().writeValueAsString(#object)"
+  entityToCallerResponse:
+    replace-with-type:
+      - /{},payload,"#convertToJson(#object['payload'])"
+

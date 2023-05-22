@@ -1,0 +1,19 @@
+DecisionServiceParameters:
+  ApplicationMessageLevel: DEBUG
+  LoggerEnabled: true
+  PerformanceTrackerEnabled: true
+  ReturnInputData: true
+  ReturnRuntimeDecisions: true
+  TestModeEnabled: true
+  TraceEnabled: true
+  TraceJsonEnabled: true
+  UnsetSpecialValues: true
+DecisionRequest:
+  WorkspaceType: BAU
+  DecisionRequestId: REQ1
+  ProjectName: Application Strategy SME RN
+  ProcessContext:
+  EffectiveTimestamp: 2009-08-16T12:45:25.294Z
+  TestItem:
+OrchestrationServiceParameters:
+  ApplicationMessageLevel: TRACE

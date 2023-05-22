@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+  <Appenders>
+    <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
+      <PatternLayout pattern="%X%style{%d{ISO8601}}{black}%highlight{%-5level}[%style{%t}{bright,blue}]%style{%c}{bright,yellow}:%msg%n%throwable"/>
+    </Console>
+  </Appenders>
+  <Loggers>
+    <!--Reference of below ConsoleAppender resolving in com.lbg:lbg-logging-filter dependency
+    which logs timestamp , hostname ,correlation-id, org-id ,brand-id from context-->
+    <Logger name="com.lbg.rsk.cdp" level="info" additivity="false">
+      <AppenderRef ref="ConsoleAppender"/>
+    </Logger>
+
+    <Root level="info">
+      <AppenderRef ref="ConsoleAppender"/>
+    </Root>
+  </Loggers>
+</Configuration>

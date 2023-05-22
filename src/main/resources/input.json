@@ -1,0 +1,12 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "RequestType": "ReqType",
+      "ApplicationDateTime": "ApplicationTimestamp",
+      "LendingGroup": {
+        "LendingGroupID": "LendingGroupID"
+      }
+    }
+  }
+]

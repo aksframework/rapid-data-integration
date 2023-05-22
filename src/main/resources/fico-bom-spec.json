@@ -1,0 +1,10 @@
+{
+  "request": {
+    "OrchestrationRequestId": "",
+    "DecisionRequest": {
+      "DecisionServiceParameters": {},
+      "InputData": {}
+    },
+    "OrchestrationServiceParameters": {}
+  }
+}

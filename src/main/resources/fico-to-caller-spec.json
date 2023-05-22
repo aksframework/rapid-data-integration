@@ -1,0 +1,63 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "request": {
+        "*": {
+          "ApplicationDecisionOutputs": {
+            "ProposalID": "ApplicationDecisionOutputs.&",
+            "ApplicationRouting": {
+              "Routing": "ApplicationDecisionOutputs.ApplicationRouting.&",
+              "RoutingTeam": "ApplicationDecisionOutputs.ApplicationRouting.&"
+            },
+            "ApplicationEligibility": {
+              "EligibilityStatus": "ApplicationDecisionOutputs.ApplicationEligibility.&"
+            },
+            "PartyDecisionOutputs": {
+              "*": {
+                "ApplicationCustomerID": "ApplicationDecisionOutputs.PartyDecisionOutputs[#2].&",
+                "PartyEligibility": "ApplicationDecisionOutputs.PartyDecisionOutputs[#2].&"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "ApplicationDecisionOutputs": {
+        "PartyDecisionOutputs": {
+          "*": {
+            "UserDefinedFields": "",
+            "PartyEligibility": {
+              "EligibilityReason": {
+                "*": {
+                  "ProposedStatus": "",
+                  "Category": "",
+                  "InternalRuleId": "",
+                  "InternalRank": "",
+                  "RoutingTeam": "",
+                  "DeclineLetterPurpose": "",
+                  "DeclineLetterAdverseCreditScore": "",
+                  "DeclineLetterConductOfAccount": ""
+                }
+              },
+              "IsEarlyDecline": "",
+              "IsPolicyDecline": ""
+            }
+          }
+        },
+        "ApplicationEligibility": {
+          "EligibilityReason": {
+            "*": {
+              "Category": ""
+            }
+          }
+        }
+      }
+    }
+  }
+
+]

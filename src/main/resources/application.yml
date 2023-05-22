@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.H2Dialect
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/test
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+server:
+  servlet:
+    contextPath: /dataflow
+weather-api-url: https://api.open-meteo.com/v1/forecast?latitude={LAT}&longitude={LONG}&current_weather=true

@@ -1,0 +1,22 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "RequestType": "ReqType",
+      "ApplicationDate": "ApplicationDate",
+      "TimeStamp": "ApplicationTimestamp",
+      "LendingGroup": {
+        "LendingGroupID": "LendingGroupID"
+      }
+    }
+  },
+  {
+    "operation": "default",
+    "spec": {
+      "inputReqTransformed": true,
+      "this is Null": null,
+      "this is blank":"",
+      "this one is valid": "valid"
+    }
+  }
+]
