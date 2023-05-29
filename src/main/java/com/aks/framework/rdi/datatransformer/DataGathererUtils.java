@@ -1,10 +1,10 @@
 package com.aks.framework.rdi.datatransformer;
 
+import com.aks.framework.rdi.base.DataFlowConstants;
 import com.bazaarvoice.jolt.common.Optional;
 import com.bazaarvoice.jolt.traversr.SimpleTraversal;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.aks.framework.rdi.base.DataFlowConstants;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;

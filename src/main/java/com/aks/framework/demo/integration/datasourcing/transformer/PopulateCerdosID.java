@@ -1,9 +1,9 @@
 package com.aks.framework.demo.integration.datasourcing.transformer;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.aks.framework.rdi.base.MapperUtils;
 import com.aks.framework.rdi.datatransformer.DataGathererUtils;
 import com.aks.framework.rdi.datatransformer.InApplicationDataTransformer;
+import com.fasterxml.jackson.databind.JsonNode;
 import java.util.Map;
 import org.springframework.integration.store.MessageGroup;
 import org.springframework.messaging.MessageHeaders;

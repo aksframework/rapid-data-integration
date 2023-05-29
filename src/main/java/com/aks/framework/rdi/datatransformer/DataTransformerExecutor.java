@@ -1,10 +1,5 @@
 package com.aks.framework.rdi.datatransformer;
 
-import static com.aks.framework.rdi.base.DataFlowConstants.ROOT_OBJECT_PARENTHESIS;
-import static com.aks.framework.rdi.datatransformer.DataGathererUtils.convertForTraversal;
-
-import com.bazaarvoice.jolt.common.Optional;
-import com.bazaarvoice.jolt.traversr.SimpleTraversal;
 import com.aks.framework.rdi.base.DataFlowConfig.DataTransformerConfig;
 import com.aks.framework.rdi.base.DataFlowConfig.ExpressionTraversalPath;
 import com.aks.framework.rdi.base.DataFlowConfig.MapTraversalPath;
@@ -12,6 +7,8 @@ import com.aks.framework.rdi.base.DataFlowConfig.MatchTraversalPath;
 import com.aks.framework.rdi.base.DataFlowConfig.TraversalPath;
 import com.aks.framework.rdi.base.DataFlowConstants;
 import com.aks.framework.rdi.base.MapperUtils;
+import com.bazaarvoice.jolt.common.Optional;
+import com.bazaarvoice.jolt.traversr.SimpleTraversal;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -52,8 +49,8 @@ public class DataTransformerExecutor {
       Object fromObject) {
     this.dataTransformerName = dataTransformerName;
     this.dataTransformerConfig = dataTransformerConfig;
-    this.toObject = convertForTraversal(toObject);
-    this.fromObject = convertForTraversal(fromObject);
+    this.toObject = DataGathererUtils.convertForTraversal(toObject);
+    this.fromObject = DataGathererUtils.convertForTraversal(fromObject);
   }
 
   /**
@@ -166,10 +163,10 @@ public class DataTransformerExecutor {
         DataGathererUtils.getObjectFromTraversal(fromTraversalPath, fromObject);
 
     if ((traversalAndObjectMap.getValue().isPresent()
-            || toTraversalPath.equals(ROOT_OBJECT_PARENTHESIS))
+            || toTraversalPath.equals(DataFlowConstants.ROOT_OBJECT_PARENTHESIS))
         && valueObject.isPresent()) {
-      if (toTraversalPath.equals(ROOT_OBJECT_PARENTHESIS)) {
-        Object convertedObj = convertForTraversal(valueObject.get());
+      if (toTraversalPath.equals(DataFlowConstants.ROOT_OBJECT_PARENTHESIS)) {
+        Object convertedObj = DataGathererUtils.convertForTraversal(valueObject.get());
         if (convertedObj instanceof Map) {
           ((Map) toObject).putAll((Map) convertedObj);
         } else {
@@ -222,12 +219,12 @@ public class DataTransformerExecutor {
         DataGathererUtils.getObjectFromTraversal(fromTraversalPath, fromObject);
 
     if ((traversalAndObjectMap.getValue().isPresent()
-            || toTraversalPath.equals(ROOT_OBJECT_PARENTHESIS))
+            || toTraversalPath.equals(DataFlowConstants.ROOT_OBJECT_PARENTHESIS))
         && valueObject.isPresent()) {
       Object value = evaluateExpression(expression, valueObject.get());
       if (null != value) {
-        if (toTraversalPath.equals(ROOT_OBJECT_PARENTHESIS)) {
-          Object convertedObj = convertForTraversal(value);
+        if (toTraversalPath.equals(DataFlowConstants.ROOT_OBJECT_PARENTHESIS)) {
+          Object convertedObj = DataGathererUtils.convertForTraversal(value);
           if (convertedObj instanceof Map) {
             ((Map) toObject).putAll((Map) convertedObj);
           } else {

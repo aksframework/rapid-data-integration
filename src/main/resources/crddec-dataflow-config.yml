@@ -1,6 +1,8 @@
 webClientProfile:
   default:
     max-timeout: 10000
+  jwtserviceProfile:
+    max-timeout: 2000
 retryProfile:
   default:
     maxAttempt: 5
@@ -9,6 +11,7 @@ retryProfile:
     backOffMultiplier: 2
 dataFlowAPIExecutor:
   jwtToken:
+    web-client-profile: jwtserviceProfile
     api-url: http://localhost:3000/jwttoken/
     http-method: POST
     request-payload-transformer: jwtTokenRequest

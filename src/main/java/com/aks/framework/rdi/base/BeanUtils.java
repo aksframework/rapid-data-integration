@@ -1,10 +1,10 @@
 package com.aks.framework.rdi.base;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.benmanes.caffeine.cache.Cache;
 import com.aks.framework.rdi.apiexecutor.custom.RequestOverrideTransformer;
 import com.aks.framework.rdi.base.DataFlowConfig.WebClientConfig;
 import com.aks.framework.rdi.datatransformer.InApplicationDataTransformer;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.benmanes.caffeine.cache.Cache;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.util.HashMap;
@@ -133,9 +133,10 @@ public class BeanUtils {
         requestFactory.setProxy(proxy);
       }
     }
-    return dataFlowRestTemplateMap.put(
+    dataFlowRestTemplateMap.put(
         webClientProfile,
         new GenerateTypeBean<RestTemplate>().get(RestTemplate.class, requestFactory));
+    return dataFlowRestTemplateMap.get(webClientProfile);
   }
 
   public static IntegrationFlowAdapter getExecutorFlow(String executorName) {
