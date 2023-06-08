@@ -1,17 +1,17 @@
 package com.aks.framework.rdi.datagatherer;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.aks.framework.rdi.annotations.DataFlowGatherer;
+import com.aks.framework.rdi.base.ApplicationConstants;
 import com.aks.framework.rdi.base.BeanUtils;
 import com.aks.framework.rdi.base.DataFlowConfig;
 import com.aks.framework.rdi.base.DataFlowConfig.DataGathererTemplateConfig;
 import com.aks.framework.rdi.base.DataFlowConfig.DataTransformerConfig;
 import com.aks.framework.rdi.base.DataFlowConfig.PlaceHolder;
-import com.aks.framework.rdi.base.DataFlowConstants;
 import com.aks.framework.rdi.base.MapperUtils;
 import com.aks.framework.rdi.datatransformer.DataGathererUtils;
 import com.aks.framework.rdi.datatransformer.DataTransformerExecutor;
 import com.aks.framework.rdi.datatransformer.InApplicationDataTransformer;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -164,7 +164,7 @@ public abstract class AbstractDataFlowGatherer extends AbstractBaseDataFlowGathe
    * @return the data spec
    */
   private Object getDataSpec(String dataSpecName) {
-    if (dataSpecName.equals(DataFlowConstants.ROOT_OBJECT_PARENTHESIS)) {
+    if (dataSpecName.equals(ApplicationConstants.ROOT_OBJECT_PARENTHESIS)) {
       return new HashMap<>();
     } else if (DataGathererUtils.isJSONFileSpec(dataSpecName)) {
       try {

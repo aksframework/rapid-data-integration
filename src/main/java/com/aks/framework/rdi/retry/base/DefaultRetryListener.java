@@ -1,6 +1,6 @@
 package com.aks.framework.rdi.retry.base;
 
-import com.aks.framework.rdi.base.DataFlowConstants;
+import com.aks.framework.rdi.base.ApplicationConstants;
 import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.retry.RetryCallback;
@@ -32,15 +32,15 @@ public class DefaultRetryListener extends RetryListenerSupport {
         log.error(
             "Retry attempt[{}] profile[{}] data-flow[{}] for exception[{}]",
             context.getRetryCount(),
-            context.getAttribute(DataFlowConstants.RETRY_PROFILE),
-            context.getAttribute(DataFlowConstants.DATA_FLOW_HEADER_NAME),
+            context.getAttribute(ApplicationConstants.RETRY_PROFILE),
+            context.getAttribute(ApplicationConstants.DATA_FLOW_HEADER_NAME),
             throwable.getClass().getCanonicalName());
       } else {
         log.error(
             "Retry attempt [{}] profile[{}] data-flow[{}] for exception[{}] actual exception[{}] stacktrace[{}]",
             context.getRetryCount(),
-            context.getAttribute(DataFlowConstants.RETRY_PROFILE),
-            context.getAttribute(DataFlowConstants.DATA_FLOW_HEADER_NAME),
+            context.getAttribute(ApplicationConstants.RETRY_PROFILE),
+            context.getAttribute(ApplicationConstants.DATA_FLOW_HEADER_NAME),
             Exception.class.getCanonicalName(),
             throwable.getClass().getCanonicalName(),
             throwable.getMessage());
@@ -48,8 +48,8 @@ public class DefaultRetryListener extends RetryListenerSupport {
     } else {
       log.error(
           "Retry profile[{}] data-flow[{}] not applicable for caught exception[{}]  retry-able exceptions{} stacktrace[{}]",
-          context.getAttribute(DataFlowConstants.RETRY_PROFILE),
-          context.getAttribute(DataFlowConstants.DATA_FLOW_HEADER_NAME),
+          context.getAttribute(ApplicationConstants.RETRY_PROFILE),
+          context.getAttribute(ApplicationConstants.DATA_FLOW_HEADER_NAME),
           throwable.getClass().getCanonicalName(),
           retryForExceptions.toString(),
           throwable.getMessage());

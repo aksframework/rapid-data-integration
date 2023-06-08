@@ -1,12 +1,10 @@
 package com.aks.framework.rdi.datagatherer;
 
-import static com.aks.framework.rdi.base.DataFlowConstants.ROOT_OBJECT_PARENTHESIS;
-
-import com.aks.framework.rdi.base.DataFlowConfig.PlaceHolder;
-import com.aks.framework.rdi.base.DataFlowConstants;
-import com.aks.framework.rdi.datatransformer.DataGathererUtils;
 import com.bazaarvoice.jolt.common.Optional;
 import com.bazaarvoice.jolt.traversr.SimpleTraversal;
+import com.aks.framework.rdi.base.ApplicationConstants;
+import com.aks.framework.rdi.base.DataFlowConfig.PlaceHolder;
+import com.aks.framework.rdi.datatransformer.DataGathererUtils;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -60,14 +58,15 @@ public class TemplatePlaceHolderExecutor {
         DataGathererUtils.getObjectFromTraversal(placeHolder.getFromPath(), fromObject);
 
     if ((traversalAndObjectMap.getValue().isPresent()
-            || toTraversalPath.equals(ROOT_OBJECT_PARENTHESIS))
+            || toTraversalPath.equals(ApplicationConstants.ROOT_OBJECT_PARENTHESIS))
         && valueObject.isPresent()) {
-      if (toTraversalPath.equals(ROOT_OBJECT_PARENTHESIS)) {
+      if (toTraversalPath.equals(ApplicationConstants.ROOT_OBJECT_PARENTHESIS)) {
         Object convertedObj = DataGathererUtils.convertForTraversal(valueObject.get());
         if (convertedObj instanceof Map) {
           ((Map) toObject).putAll((Map) convertedObj);
         } else {
-          ((Map) toObject).put(DataFlowConstants.DEFAULT_NODE_NAME_IF_SOURCE_IS_ROOT, convertedObj);
+          ((Map) toObject)
+              .put(ApplicationConstants.DEFAULT_NODE_NAME_IF_SOURCE_IS_ROOT, convertedObj);
         }
       } else {
         traversalAndObjectMap.getKey().set(toObject, valueObject.get());

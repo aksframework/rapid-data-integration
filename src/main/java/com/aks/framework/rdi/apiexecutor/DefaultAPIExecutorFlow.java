@@ -1,8 +1,8 @@
 package com.aks.framework.rdi.apiexecutor;
 
-import static com.aks.framework.rdi.base.DataFlowUtils.createChannel;
+import static com.aks.framework.rdi.base.RDIUtils.createChannel;
 
-import com.aks.framework.rdi.base.DataFlowConstants;
+import com.aks.framework.rdi.base.ApplicationConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.integration.dsl.IntegrationFlowDefinition;
 
@@ -22,7 +22,7 @@ public class DefaultAPIExecutorFlow extends AbstractAPIExecutorFlow {
   @Override
   public IntegrationFlowDefinition<?> buildFlow() {
     return new APIExecutorDefinition(dataFlowBaseExecutor, dataFlowName)
-        .from(createChannel(dataFlowName, DataFlowConstants.API_EXECUTOR_CHANNEL))
+        .from(createChannel(dataFlowName, ApplicationConstants.API_EXECUTOR_CHANNEL))
         .transformRequest()
         .executeRequest()
         .transformResponse()

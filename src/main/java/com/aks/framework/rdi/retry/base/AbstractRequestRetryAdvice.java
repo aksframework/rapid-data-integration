@@ -1,7 +1,7 @@
 package com.aks.framework.rdi.retry.base;
 
+import com.aks.framework.rdi.base.ApplicationConstants;
 import com.aks.framework.rdi.base.DataFlowConfig;
-import com.aks.framework.rdi.base.DataFlowConstants;
 import java.util.function.Supplier;
 import org.springframework.integration.handler.advice.RequestHandlerRetryAdvice;
 import org.springframework.retry.RetryCallback;
@@ -66,9 +66,9 @@ public abstract class AbstractRequestRetryAdvice<T extends String>
               public <T, E extends Throwable> boolean open(
                   RetryContext context, RetryCallback<T, E> callback) {
                 context.setAttribute(
-                    DataFlowConstants.RETRY_PROFILE,
+                    ApplicationConstants.RETRY_PROFILE,
                     dataFlowConfig.getAPIExecutorConfig(dataFlowName).getRetryProfile());
-                context.setAttribute(DataFlowConstants.DATA_FLOW_HEADER_NAME, dataFlowName);
+                context.setAttribute(ApplicationConstants.DATA_FLOW_HEADER_NAME, dataFlowName);
                 return super.open(context, callback);
               }
             };

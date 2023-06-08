@@ -1,10 +1,11 @@
 package com.aks.framework.rdi.apiexecutor;
 
-import static com.aks.framework.rdi.base.DataFlowConstants.SPEC_TYPE.REQUEST;
-import static com.aks.framework.rdi.base.DataFlowConstants.SPEC_TYPE.RESPONSE;
-import static com.aks.framework.rdi.base.DataFlowUtils.createChannel;
+import static com.aks.framework.rdi.base.ApplicationConstants.SPEC_TYPE.REQUEST;
+import static com.aks.framework.rdi.base.ApplicationConstants.SPEC_TYPE.RESPONSE;
 import static com.aks.framework.rdi.base.MapperUtils.convertToJson;
+import static com.aks.framework.rdi.base.RDIUtils.createChannel;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.aks.framework.rdi.annotations.OnRequest;
 import com.aks.framework.rdi.annotations.RequestTransformer;
 import com.aks.framework.rdi.annotations.ResponseTransformer;
@@ -12,19 +13,18 @@ import com.aks.framework.rdi.apiexecutor.custom.AddEnrichHeader;
 import com.aks.framework.rdi.apiexecutor.custom.AddGatewayHandler;
 import com.aks.framework.rdi.apiexecutor.custom.AddRequestRetryAdvice;
 import com.aks.framework.rdi.apiexecutor.custom.RequestOverrideTransformer;
+import com.aks.framework.rdi.base.ApplicationConstants;
+import com.aks.framework.rdi.base.ApplicationConstants.CACHE_KEYS;
+import com.aks.framework.rdi.base.ApplicationConstants.SPEC_TYPE;
 import com.aks.framework.rdi.base.BeanUtils;
 import com.aks.framework.rdi.base.DataFlowBaseExecutor;
 import com.aks.framework.rdi.base.DataFlowConfig;
 import com.aks.framework.rdi.base.DataFlowConfig.APIExecutorConfig;
 import com.aks.framework.rdi.base.DataFlowConfig.UriVariable;
-import com.aks.framework.rdi.base.DataFlowConstants;
-import com.aks.framework.rdi.base.DataFlowConstants.CACHE_KEYS;
-import com.aks.framework.rdi.base.DataFlowConstants.SPEC_TYPE;
 import com.aks.framework.rdi.base.DefaultTransformer;
 import com.aks.framework.rdi.base.MapperUtils;
 import com.aks.framework.rdi.datatransformer.PayloadTransformer;
 import com.aks.framework.rdi.retry.DefaultRequestRetryAdvice.DefaultRequestRetryAdviceBuilder;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -144,8 +144,9 @@ public class APIExecutorDefinition extends IntegrationFlowExtension<APIExecutorD
         .enrichHeaders(
             h1 -> {
               h1.errorChannel(
-                  createChannel(dataFlowName, DataFlowConstants.API_EXECUTOR_ERROR_CHANNEL), true);
-              h1.header(DataFlowConstants.DATA_FLOW_HEADER_NAME, dataFlowName);
+                  createChannel(dataFlowName, ApplicationConstants.API_EXECUTOR_ERROR_CHANNEL),
+                  true);
+              h1.header(ApplicationConstants.DATA_FLOW_HEADER_NAME, dataFlowName);
               // h1.header("Content-Type", "application/json");
             });
   }
@@ -199,7 +200,8 @@ public class APIExecutorDefinition extends IntegrationFlowExtension<APIExecutorD
         .enrichHeaders(
             h -> {
               h.errorChannel(
-                  createChannel(dataFlowName, DataFlowConstants.API_EXECUTOR_ERROR_CHANNEL), true);
+                  createChannel(dataFlowName, ApplicationConstants.API_EXECUTOR_ERROR_CHANNEL),
+                  true);
             });
   }
 
@@ -333,7 +335,7 @@ public class APIExecutorDefinition extends IntegrationFlowExtension<APIExecutorD
     String responseText = String.format("API-Flow [%s:%s] <-", httpMethod, dataFlowName);
 
     APIExecutorDefinition logRequest =
-        log(requestText, message -> "Headers " + message.getHeaders());
+        log(requestText, message -> "Headers:[" + message.getHeaders() + "] Payload:[" + message.getPayload() + "]");
 
     if (dataFlowBaseExecutor instanceof AddGatewayHandler) {
       return logRequest

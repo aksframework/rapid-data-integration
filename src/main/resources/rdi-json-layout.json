@@ -1,0 +1,63 @@
+{
+  "timestamp": {
+    "$resolver": "timestamp",
+    "pattern": {
+      "format": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+      "timeZone": "UTC"
+    }
+  },
+  "host": "${hostName}",
+  "thread_name": {
+    "$resolver": "thread",
+    "field": "name"
+  },
+  "severity": {
+    "$resolver": "pattern",
+    "pattern": "%level{WARN=WARNING, TRACE=DEBUG, FATAL=EMERGENCY}",
+    "stackTraceEnabled": false
+  },
+  "logger_name": {
+    "$resolver": "pattern",
+    "pattern": "%c{1.}"
+  },
+  "message": {
+    "$resolver": "message",
+    "stringified": true
+  },
+  "mdc": {
+    "$resolver": "mdc"
+  },
+  "_exception": {
+    "class": {
+      "$resolver": "exception",
+      "field": "className"
+    },
+    "message": {
+      "$resolver": "exception",
+      "field": "message"
+    },
+    "stackTrace": {
+      "$resolver": "pattern",
+      "pattern": "%xEx"
+    }
+  },
+  "logging.source": {
+    "file": {
+      "$resolver": "source",
+      "field": "fileName"
+    },
+    "line": {
+      "$resolver": "source",
+      "field": "lineNumber"
+    },
+    "function": {
+      "$resolver": "pattern",
+      "pattern": "%replace{%C.%M}{^\\?\\.$}{}",
+      "stackTraceEnabled": false
+    }
+  },
+  "logger.fullname": {
+    "$resolver": "logger",
+    "field": "name"
+  }
+}

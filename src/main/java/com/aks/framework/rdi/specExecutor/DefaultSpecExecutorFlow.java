@@ -1,8 +1,7 @@
 package com.aks.framework.rdi.specExecutor;
 
-import static com.aks.framework.rdi.base.DataFlowUtils.createChannel;
-
-import com.aks.framework.rdi.base.DataFlowConstants;
+import com.aks.framework.rdi.base.ApplicationConstants;
+import com.aks.framework.rdi.base.RDIUtils;
 import org.springframework.integration.dsl.IntegrationFlowDefinition;
 
 public class DefaultSpecExecutorFlow extends AbstractSpecExecutorFlow {
@@ -19,7 +18,7 @@ public class DefaultSpecExecutorFlow extends AbstractSpecExecutorFlow {
   @Override
   public IntegrationFlowDefinition<?> buildFlow() {
     return new SpecExecutorDefinition(dataFlowBaseExecutor, dataFlowName)
-        .from(createChannel(dataFlowName, DataFlowConstants.SPEC_EXECUTOR_CHANNEL))
+        .from(RDIUtils.createChannel(dataFlowName, ApplicationConstants.SPEC_EXECUTOR_CHANNEL))
         .executeRequest()
         .bridge();
   }

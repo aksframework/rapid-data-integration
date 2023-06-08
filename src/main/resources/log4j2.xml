@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+  <Appenders>
+    <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
+      <JsonTemplateLayout eventTemplateUri="classpath:rdi-json-layout.json"/>
+    </Console>
+  </Appenders>
+  <Loggers>
+    <Logger name="com.aks.framework" level="info" additivity="false">
+      <AppenderRef ref="ConsoleAppender"/>
+    </Logger>
+
+    <Root level="info">
+      <AppenderRef ref="ConsoleAppender"/>
+    </Root>
+  </Loggers>
+</Configuration>

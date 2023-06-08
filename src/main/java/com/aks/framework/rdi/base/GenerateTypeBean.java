@@ -42,7 +42,7 @@ public class GenerateTypeBean<T> {
     genericBeanDefinition.setBeanClass(typeOfClass);
     genericBeanDefinition.setConstructorArgumentValues(constructorArgumentValues);
 
-    String beanName = DataFlowConstants.DATA_FLOW_STRING + typeOfClass.getSimpleName();
+    String beanName = ApplicationConstants.DATA_FLOW_STRING + typeOfClass.getSimpleName();
     DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
     beanFactory.registerBeanDefinition(beanName, genericBeanDefinition);
     T beanObject = beanFactory.getBean(beanName, typeOfClass);

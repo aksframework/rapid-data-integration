@@ -1,11 +1,11 @@
 package com.aks.framework.rdi.apiexecutor;
 
-import static com.aks.framework.rdi.base.DataFlowUtils.createChannel;
+import static com.aks.framework.rdi.base.RDIUtils.createChannel;
 
+import com.aks.framework.rdi.base.ApplicationConstants;
 import com.aks.framework.rdi.base.BeanUtils;
 import com.aks.framework.rdi.base.DataFlowBaseExecutor;
 import com.aks.framework.rdi.base.DataFlowConfig;
-import com.aks.framework.rdi.base.DataFlowConstants;
 import com.aks.framework.rdi.dbexecutor.DBExecutor;
 import java.util.Objects;
 import java.util.Optional;
@@ -61,10 +61,10 @@ public abstract class AbstractBaseExecutorFlow extends IntegrationFlowAdapter {
   public void addErrorChannelHandler() {
     String errorChannel =
         dataFlowBaseExecutor instanceof APIExecutor
-            ? DataFlowConstants.API_EXECUTOR_ERROR_CHANNEL
+            ? ApplicationConstants.API_EXECUTOR_ERROR_CHANNEL
             : dataFlowBaseExecutor instanceof DBExecutor
-                ? DataFlowConstants.DB_EXECUTOR_ERROR_CHANNEL
-                : DataFlowConstants.SPEC_EXECUTOR_ERROR_CHANNEL;
+                ? ApplicationConstants.DB_EXECUTOR_ERROR_CHANNEL
+                : ApplicationConstants.SPEC_EXECUTOR_ERROR_CHANNEL;
 
     IntegrationFlow integrationFlow =
         IntegrationFlows.from(createChannel(dataFlowName, errorChannel))
@@ -84,7 +84,7 @@ public abstract class AbstractBaseExecutorFlow extends IntegrationFlowAdapter {
                               .getSecond())
                       .setHeader(
                           MessageHeaders.REPLY_CHANNEL,
-                          messageHeaders.get(DataFlowConstants.ORIGINAL_ERROR_CHANNEL))
+                          messageHeaders.get(ApplicationConstants.ORIGINAL_ERROR_CHANNEL))
                       .build();
                 })
             .get();

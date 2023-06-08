@@ -1,9 +1,9 @@
 package com.aks.framework.rdi.dbexecutor;
 
-import static com.aks.framework.rdi.base.DataFlowUtils.createChannel;
+import static com.aks.framework.rdi.base.RDIUtils.createChannel;
 
+import com.aks.framework.rdi.base.ApplicationConstants;
 import com.aks.framework.rdi.base.DataFlowBaseExecutor;
-import com.aks.framework.rdi.base.DataFlowConstants;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.integration.dsl.IntegrationFlowDefinition;
 
@@ -26,7 +26,7 @@ public class DefaultDBExecutorFlow extends AbstractDBExecutorFlow {
   public IntegrationFlowDefinition<?> buildFlow() {
     return new DBExecutorDefinition(
             dataFlowBaseExecutor, dataFlowName, entityClass, repositoryClass)
-        .from(createChannel(dataFlowName, DataFlowConstants.DB_EXECUTOR_CHANNEL))
+        .from(createChannel(dataFlowName, ApplicationConstants.DB_EXECUTOR_CHANNEL))
         .transformRequest()
         .executeRequest()
         .transformResponse()

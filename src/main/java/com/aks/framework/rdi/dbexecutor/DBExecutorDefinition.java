@@ -1,20 +1,20 @@
 package com.aks.framework.rdi.dbexecutor;
 
-import static com.aks.framework.rdi.base.DataFlowUtils.createChannel;
 import static com.aks.framework.rdi.base.MapperUtils.convertToJson;
+import static com.aks.framework.rdi.base.RDIUtils.createChannel;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.aks.framework.rdi.annotations.RequestTransformer;
 import com.aks.framework.rdi.annotations.ResponseTransformer;
 import com.aks.framework.rdi.apiexecutor.custom.AddEnrichHeader;
+import com.aks.framework.rdi.base.ApplicationConstants;
+import com.aks.framework.rdi.base.ApplicationConstants.SPEC_TYPE;
 import com.aks.framework.rdi.base.BeanUtils;
 import com.aks.framework.rdi.base.DataFlowBaseExecutor;
 import com.aks.framework.rdi.base.DataFlowConfig.DBExecutorConfig;
-import com.aks.framework.rdi.base.DataFlowConstants;
-import com.aks.framework.rdi.base.DataFlowConstants.SPEC_TYPE;
 import com.aks.framework.rdi.base.DefaultTransformer;
 import com.aks.framework.rdi.base.MapperUtils;
 import com.aks.framework.rdi.datatransformer.PayloadTransformer;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
@@ -51,8 +51,9 @@ public class DBExecutorDefinition extends IntegrationFlowExtension<DBExecutorDef
         .enrichHeaders(
             h -> {
               h.errorChannel(
-                  createChannel(dataFlowName, DataFlowConstants.DB_EXECUTOR_ERROR_CHANNEL), true);
-              h.header(DataFlowConstants.DATA_FLOW_HEADER_NAME, dataFlowName);
+                  createChannel(dataFlowName, ApplicationConstants.DB_EXECUTOR_ERROR_CHANNEL),
+                  true);
+              h.header(ApplicationConstants.DATA_FLOW_HEADER_NAME, dataFlowName);
               if (dbExecutor instanceof AddEnrichHeader) {
                 ((AddEnrichHeader) dbExecutor).enrichHeader(h);
               }

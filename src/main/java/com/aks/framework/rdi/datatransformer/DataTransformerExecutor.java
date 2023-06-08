@@ -1,14 +1,16 @@
 package com.aks.framework.rdi.datatransformer;
 
+import static com.aks.framework.rdi.datatransformer.DataGathererUtils.convertForTraversal;
+
+import com.bazaarvoice.jolt.common.Optional;
+import com.bazaarvoice.jolt.traversr.SimpleTraversal;
+import com.aks.framework.rdi.base.ApplicationConstants;
 import com.aks.framework.rdi.base.DataFlowConfig.DataTransformerConfig;
 import com.aks.framework.rdi.base.DataFlowConfig.ExpressionTraversalPath;
 import com.aks.framework.rdi.base.DataFlowConfig.MapTraversalPath;
 import com.aks.framework.rdi.base.DataFlowConfig.MatchTraversalPath;
 import com.aks.framework.rdi.base.DataFlowConfig.TraversalPath;
-import com.aks.framework.rdi.base.DataFlowConstants;
 import com.aks.framework.rdi.base.MapperUtils;
-import com.bazaarvoice.jolt.common.Optional;
-import com.bazaarvoice.jolt.traversr.SimpleTraversal;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -20,37 +22,35 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.util.ObjectUtils;
 
-/** The type DataTransformerExecutor. */
+/**
+ * The type Data transformer executor.
+ */
 @Slf4j
 public class DataTransformerExecutor {
-  /** The Data transformer name. */
   private final String dataTransformerName;
-  /** The Data transformer. */
   private final DataTransformerConfig dataTransformerConfig;
 
-  /** The To object. */
   private Object toObject;
 
-  /** The From object. */
   private Object fromObject;
 
   /**
    * Instantiates a new Data transformer executor.
    *
    * @param dataTransformerName the data transformer name
-   * @param dataTransformerConfig the data transformer
+   * @param dataTransformerConfig the data transformer config
    * @param toObject the to object
    * @param fromObject the from object
    */
-  public DataTransformerExecutor(
+public DataTransformerExecutor(
       String dataTransformerName,
       DataTransformerConfig dataTransformerConfig,
       Object toObject,
       Object fromObject) {
     this.dataTransformerName = dataTransformerName;
     this.dataTransformerConfig = dataTransformerConfig;
-    this.toObject = DataGathererUtils.convertForTraversal(toObject);
-    this.fromObject = DataGathererUtils.convertForTraversal(fromObject);
+    this.toObject = convertForTraversal(toObject);
+    this.fromObject = convertForTraversal(fromObject);
   }
 
   /**
@@ -58,24 +58,19 @@ public class DataTransformerExecutor {
    *
    * @return the object
    */
-  public Object execute() {
+public Object execute() {
     if (!dataTransformerConfig.isInApplication()) {
-      executeReplaceWith(toObject, fromObject);
-      executeReplaceWithType(toObject, fromObject);
-      executeReplaceFixed(toObject);
-      executeMapWith(toObject, fromObject);
+      executeRemoveField(toObject);
       executeMapWithMatch(toObject, fromObject);
+      executeMapWith(toObject, fromObject);
       executeReplaceWithMatch(toObject, fromObject);
+      executeReplaceWith(toObject, fromObject);
+      executeReplaceFixed(toObject);
+      executeReplaceWithType(toObject, fromObject);
     }
     return toObject;
   }
 
-  /**
-   * Execute replace with.
-   *
-   * @param toObject the to object
-   * @param fromObject the from object
-   */
   private void executeReplaceWith(Object toObject, Object fromObject) {
     if (!ObjectUtils.isEmpty(dataTransformerConfig.getReplaceWith())) {
 
@@ -100,11 +95,6 @@ public class DataTransformerExecutor {
     }
   }
 
-  /**
-   * Execute replace fixed.
-   *
-   * @param toObject the to object
-   */
   private void executeReplaceFixed(Object toObject) {
     if (!ObjectUtils.isEmpty(dataTransformerConfig.getReplaceFixed())) {
       for (TraversalPath replaceFixed : dataTransformerConfig.getReplaceFixed()) {
@@ -116,13 +106,6 @@ public class DataTransformerExecutor {
     }
   }
 
-  /**
-   * Replace fixed.
-   *
-   * @param toObject the to object
-   * @param toTraversalPath the to traversal path
-   * @param replaceFixedValue the replace fixed value
-   */
   private void replaceFixed(Object toObject, String toTraversalPath, String replaceFixedValue) {
     Entry<SimpleTraversal<Object>, Optional<Object>> traversalAndObjectMap =
         DataGathererUtils.getTraversalAndObjectMap(toTraversalPath, toObject);
@@ -147,14 +130,34 @@ public class DataTransformerExecutor {
     }
   }
 
-  /**
-   * Replace with.
-   *
-   * @param toObject the to object
-   * @param fromObject the from object
-   * @param toTraversalPath the to traversal path
-   * @param fromTraversalPath the from traversal path
-   */
+  private void executeRemoveField(Object toObject) {
+    if (!ObjectUtils.isEmpty(dataTransformerConfig.getRemoveField())) {
+      for (String replaceFixed : dataTransformerConfig.getRemoveField()) {
+        List<String> toObjectTraversalList = getTraversalList(replaceFixed, toObject);
+        toObjectTraversalList.forEach(
+            toObjectTraversal -> removeField(toObject, toObjectTraversal));
+      }
+    }
+  }
+
+  private void removeField(Object toObject, String toTraversalPath) {
+    Entry<SimpleTraversal<Object>, Optional<Object>> traversalAndObjectMap =
+        DataGathererUtils.getTraversalAndObjectMap(toTraversalPath, toObject);
+    if (traversalAndObjectMap.getValue().isPresent()) {
+      traversalAndObjectMap.getKey().remove(toObject);
+      log.info(
+          "Transformed -> transformer[{}] [remove-field] for[{}] Result[{}]",
+          dataTransformerName,
+          toTraversalPath,
+          toObject);
+    } else {
+      log.info(
+          "Error in -> transformer[{}] [remove-field] for[{}], Field not present.",
+          dataTransformerName,
+          toTraversalPath);
+    }
+  }
+
   private void replaceWith(
       Object toObject, Object fromObject, String toTraversalPath, String fromTraversalPath) {
     Entry<SimpleTraversal<Object>, Optional<Object>> traversalAndObjectMap =
@@ -163,14 +166,15 @@ public class DataTransformerExecutor {
         DataGathererUtils.getObjectFromTraversal(fromTraversalPath, fromObject);
 
     if ((traversalAndObjectMap.getValue().isPresent()
-            || toTraversalPath.equals(DataFlowConstants.ROOT_OBJECT_PARENTHESIS))
+            || toTraversalPath.equals(ApplicationConstants.ROOT_OBJECT_PARENTHESIS))
         && valueObject.isPresent()) {
-      if (toTraversalPath.equals(DataFlowConstants.ROOT_OBJECT_PARENTHESIS)) {
-        Object convertedObj = DataGathererUtils.convertForTraversal(valueObject.get());
+      if (toTraversalPath.equals(ApplicationConstants.ROOT_OBJECT_PARENTHESIS)) {
+        Object convertedObj = convertForTraversal(valueObject.get());
         if (convertedObj instanceof Map) {
           ((Map) toObject).putAll((Map) convertedObj);
         } else {
-          ((Map) toObject).put(DataFlowConstants.DEFAULT_NODE_NAME_IF_SOURCE_IS_ROOT, convertedObj);
+          ((Map) toObject)
+              .put(ApplicationConstants.DEFAULT_NODE_NAME_IF_SOURCE_IS_ROOT, convertedObj);
         }
       } else {
         traversalAndObjectMap.getKey().set(toObject, valueObject.get());
@@ -219,17 +223,17 @@ public class DataTransformerExecutor {
         DataGathererUtils.getObjectFromTraversal(fromTraversalPath, fromObject);
 
     if ((traversalAndObjectMap.getValue().isPresent()
-            || toTraversalPath.equals(DataFlowConstants.ROOT_OBJECT_PARENTHESIS))
+            || toTraversalPath.equals(ApplicationConstants.ROOT_OBJECT_PARENTHESIS))
         && valueObject.isPresent()) {
       Object value = evaluateExpression(expression, valueObject.get());
       if (null != value) {
-        if (toTraversalPath.equals(DataFlowConstants.ROOT_OBJECT_PARENTHESIS)) {
-          Object convertedObj = DataGathererUtils.convertForTraversal(value);
+        if (toTraversalPath.equals(ApplicationConstants.ROOT_OBJECT_PARENTHESIS)) {
+          Object convertedObj = convertForTraversal(value);
           if (convertedObj instanceof Map) {
             ((Map) toObject).putAll((Map) convertedObj);
           } else {
             ((Map) toObject)
-                .put(DataFlowConstants.DEFAULT_NODE_NAME_IF_SOURCE_IS_ROOT, convertedObj);
+                .put(ApplicationConstants.DEFAULT_NODE_NAME_IF_SOURCE_IS_ROOT, convertedObj);
           }
         } else {
           traversalAndObjectMap.getKey().set(toObject, value);
@@ -281,22 +285,10 @@ public class DataTransformerExecutor {
     }
   }
 
-  /**
-   * Gets traversal.
-   *
-   * @param traversalPath the traversal path
-   * @return the traversal
-   */
   private SimpleTraversal getTraversal(String traversalPath) {
     return SimpleTraversal.newTraversal(traversalPath);
   }
 
-  /**
-   * Execute map with.
-   *
-   * @param toObject the to object
-   * @param fromObject the from object
-   */
   private void executeMapWith(Object toObject, Object fromObject) {
     if (!ObjectUtils.isEmpty(dataTransformerConfig.getMapWith())) {
       for (MapTraversalPath mapWith : dataTransformerConfig.getMapWith()) {
@@ -318,15 +310,6 @@ public class DataTransformerExecutor {
     }
   }
 
-  /**
-   * With map.
-   *
-   * @param toObject the to object
-   * @param fromObject the from object
-   * @param toTraversalPath the to traversal path
-   * @param fromTraversalPath the from traversal path
-   * @param mapWithObjectName the map with object name
-   */
   private void withMap(
       Object toObject,
       Object fromObject,
@@ -351,23 +334,10 @@ public class DataTransformerExecutor {
     }
   }
 
-  /**
-   * Gets traversal list.
-   *
-   * @param traversalPath the traversal path
-   * @param traversalObject the traversal object
-   * @return the traversal list
-   */
   private List<String> getTraversalList(String traversalPath, Object traversalObject) {
     return DataGathererUtils.getTraversalList(traversalPath, traversalObject);
   }
 
-  /**
-   * Execute replace with match.
-   *
-   * @param toObject the to object
-   * @param fromObject the from object
-   */
   private void executeReplaceWithMatch(Object toObject, Object fromObject) {
     if (!ObjectUtils.isEmpty(dataTransformerConfig.getReplaceWithMatch())) {
       for (MatchTraversalPath replaceWithMatch : dataTransformerConfig.getReplaceWithMatch()) {
@@ -394,16 +364,6 @@ public class DataTransformerExecutor {
     }
   }
 
-  /**
-   * Replace with match.
-   *
-   * @param toObject the to object
-   * @param fromObject the from object
-   * @param matchToTraversalPath the match to traversal path
-   * @param matchFromTraversalPath the match from traversal path
-   * @param toTraversalPath the to traversal path
-   * @param fromTraversalPath the from traversal path
-   */
   private void replaceWithMatch(
       Object toObject,
       Object fromObject,
@@ -445,12 +405,6 @@ public class DataTransformerExecutor {
     }
   }
 
-  /**
-   * Execute map with match.
-   *
-   * @param toObject the to object
-   * @param fromObject the from object
-   */
   private void executeMapWithMatch(Object toObject, Object fromObject) {
     if (!ObjectUtils.isEmpty(dataTransformerConfig.getMapWithMatch())) {
       for (MatchTraversalPath mapWithMatch : dataTransformerConfig.getMapWithMatch()) {
@@ -470,8 +424,8 @@ public class DataTransformerExecutor {
             getTraversalList(mapWithMatch.getFromPath(), fromObject);
 
         if (toMatchObjectTraversalList.size() != fromMatchObjectTraversalList.size()
-            && toMatchObjectTraversalList.size() != mapToObjectTraversalList.size()
-            && toMatchObjectTraversalList.size() != mapFromObjectTraversalList.size()) {
+            || toMatchObjectTraversalList.size() != mapToObjectTraversalList.size()
+            || toMatchObjectTraversalList.size() != mapFromObjectTraversalList.size()) {
           throw new RuntimeException("Invalid transformer pattern [" + mapWithMatch + "]");
         }
         IntStream.range(0, toMatchObjectTraversalList.size())
@@ -481,65 +435,57 @@ public class DataTransformerExecutor {
                         toObject,
                         fromObject,
                         toMatchObjectTraversalList.get(i),
-                        fromMatchObjectTraversalList.get(i),
+                        fromMatchObjectTraversalList,
                         mapToObjectTraversalList.get(i),
-                        mapFromObjectTraversalList.get(i),
+                        mapFromObjectTraversalList,
                         mapWithObjectName));
       }
     }
   }
 
-  /**
-   * With map match.
-   *
-   * @param toObject the to object
-   * @param fromObject the from object
-   * @param matchToTraversalPath the match to traversal path
-   * @param matchFromTraversalPath the match from traversal path
-   * @param mapToObjectPath the map to object path
-   * @param mapFromObjectPath the map from object path
-   * @param mapWithObjectName the map with object name
-   */
   private void withMapMatch(
       Object toObject,
       Object fromObject,
       String matchToTraversalPath,
-      String matchFromTraversalPath,
+      List<String> matchFromTraversalPath,
       String mapToObjectPath,
-      String mapFromObjectPath,
+      List<String> mapFromObjectPath,
       String mapWithObjectName) {
     Optional<Object> matchToObject =
         DataGathererUtils.getObjectFromTraversal(matchToTraversalPath, toObject);
-    Optional<Object> matchFromObject =
-        DataGathererUtils.getObjectFromTraversal(matchFromTraversalPath, fromObject);
     Optional<Object> mapToObject =
         DataGathererUtils.getObjectFromTraversal(mapToObjectPath, toObject);
-    Optional<Object> mapFromObject =
-        DataGathererUtils.getObjectFromTraversal(mapFromObjectPath, fromObject);
 
-    if (matchToObject.isPresent()
-        && matchFromObject.isPresent()
-        && mapToObject.isPresent()
-        && mapFromObject.isPresent()) {
-      if (matchToObject.get().toString().equals(matchFromObject.get().toString())) {
-        ((Map) mapToObject.get()).put(mapWithObjectName, "-");
-        getTraversal(mapToObjectPath + "." + mapWithObjectName).set(toObject, mapFromObject.get());
-        log.info(
-            "Transformed -> transformer[{}] [map-with-match] for[{}-{}-{}] Result[{}]",
-            dataTransformerName,
-            matchToTraversalPath,
-            matchFromTraversalPath,
-            mapWithObjectName,
-            toObject);
-      } else {
-        log.info(
-            "Value not matched -> transformer[{}] [map-with-matched] for[{}-{}-{}] source value[{}] target value[{}]",
-            dataTransformerName,
-            matchToTraversalPath,
-            matchFromTraversalPath,
-            mapWithObjectName,
-            matchFromObject.get().toString(),
-            matchToObject.get().toString());
+    for (int i = 0; i < matchFromTraversalPath.size(); i++) {
+      Optional<Object> matchFromObject =
+          DataGathererUtils.getObjectFromTraversal(matchFromTraversalPath.get(i), fromObject);
+      Optional<Object> mapFromObject =
+          DataGathererUtils.getObjectFromTraversal(mapFromObjectPath.get(i), fromObject);
+      if (matchToObject.isPresent()
+          && matchFromObject.isPresent()
+          && mapToObject.isPresent()
+          && mapFromObject.isPresent()) {
+        if (matchToObject.get().toString().equals(matchFromObject.get().toString())) {
+          ((Map) mapToObject.get()).put(mapWithObjectName, "-");
+          getTraversal(mapToObjectPath + "." + mapWithObjectName).set(toObject, mapFromObject.get());
+          log.info(
+              "Transformed -> transformer[{}] [map-with-match] for[{}-{}-{}] Result[{}]",
+              dataTransformerName,
+              matchToTraversalPath,
+              matchFromTraversalPath.get(i),
+              mapWithObjectName,
+              toObject);
+          break;
+        } else {
+          log.info(
+              "Value not matched -> transformer[{}] [map-with-match] for[{}-{}-{}] source value[{}] target value[{}]",
+              dataTransformerName,
+              matchToTraversalPath,
+              matchFromTraversalPath.get(i),
+              mapWithObjectName,
+              matchFromObject.get().toString(),
+              matchToObject.get().toString());
+        }
       }
     }
   }

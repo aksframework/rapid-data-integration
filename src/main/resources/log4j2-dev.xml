@@ -2,7 +2,7 @@
 <Configuration status="WARN" monitorInterval="30">
   <Appenders>
     <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
-      <PatternLayout pattern="%X%style{%d{ISO8601}}{black}%highlight{%-5level}[%style{%t}{bright,blue}]%style{%c}{bright,yellow}:%msg%n%throwable"/>
+      <PatternLayout pattern="%style{%d{ISO8601}}{dark,red}%highlight{ %-5level}[%style{%t}{bright,blue}] MDC%X%style{ %c}{bright,yellow}: %msg%n%throwable"/>
     </Console>
   </Appenders>
   <Loggers>

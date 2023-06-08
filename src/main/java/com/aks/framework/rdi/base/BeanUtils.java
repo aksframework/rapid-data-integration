@@ -1,10 +1,10 @@
 package com.aks.framework.rdi.base;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.benmanes.caffeine.cache.Cache;
 import com.aks.framework.rdi.apiexecutor.custom.RequestOverrideTransformer;
 import com.aks.framework.rdi.base.DataFlowConfig.WebClientConfig;
 import com.aks.framework.rdi.datatransformer.InApplicationDataTransformer;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.benmanes.caffeine.cache.Cache;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.util.HashMap;
@@ -67,7 +67,8 @@ public class BeanUtils {
   }
 
   public static Cache<String, Map<String, Object>> getCache() {
-    return getBean("dataFlowCache", Cache.class).orElseThrow(RuntimeException::new);
+    return getBean("dataFlowCache", Cache.class)
+        .orElseThrow(() -> new RuntimeException("BeanUtils unable to find dataFlowCache bean."));
   }
 
   /**
@@ -91,7 +92,12 @@ public class BeanUtils {
 
   public static DataFlowConfig getDataFlowConfig() {
     if (null == dataFlowConfig) {
-      dataFlowConfig = getBean(DataFlowConfig.class).orElseThrow(RuntimeException::new);
+      dataFlowConfig =
+          getBean(DataFlowConfig.class)
+              .orElseThrow(
+                  () ->
+                      new RuntimeException(
+                          "BeanUtils unable to find DataFlowConfig bean. Please re-check RDI config file to fix error."));
     }
     return dataFlowConfig;
   }
@@ -115,8 +121,8 @@ public class BeanUtils {
         Optional.ofNullable(dataFlowConfig.getWebClientByProfile(webClientProfile));
 
     SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-    requestFactory.setConnectTimeout(DataFlowConstants.DEFAULT_CONNECT_TIMEOUT);
-    requestFactory.setReadTimeout(DataFlowConstants.DEFAULT_READ_TIMEOUT);
+    requestFactory.setConnectTimeout(ApplicationConstants.DEFAULT_CONNECT_TIMEOUT);
+    requestFactory.setReadTimeout(ApplicationConstants.DEFAULT_READ_TIMEOUT);
     // requestFactory.setBufferRequestBody(false);
 
     if (webClientConfigOptional.isPresent()) {

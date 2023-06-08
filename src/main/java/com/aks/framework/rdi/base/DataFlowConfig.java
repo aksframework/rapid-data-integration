@@ -33,13 +33,8 @@ import org.springframework.util.ObjectUtils;
 @Configuration
 @ConfigurationProperties
 @PropertySource(
-    value = {
-      "dataflow-config.yml",
-      "classpath:crddec-dataflow-config.yml",
-      "classpath:datasourcing-dataflow-config.yml",
-      "classpath:orch-dataflow-config.yml"
-    },
-    factory = YamlPropertySourceFactory.class)
+    value = {"classpath:rdi-config.yml"},
+    factory = RDIPropertySourceFactory.class)
 public class DataFlowConfig {
 
   private Map<String, WebClientConfig> webClientProfile;
@@ -73,7 +68,7 @@ public class DataFlowConfig {
     if (apiExecutorConfig != null && !ObjectUtils.isEmpty(apiExecutorConfig.getRetryProfile())) {
       return this.getRetryProfile().get(apiExecutorConfig.getRetryProfile());
     }
-    return this.getRetryProfile().get(DataFlowConstants.DEFAULT);
+    return this.getRetryProfile().get(ApplicationConstants.DEFAULT);
   }
 
   /**
@@ -384,6 +379,7 @@ public class DataFlowConfig {
     private List<String[]> replaceWith;
     private List<String[]> replaceWithType;
     private List<String[]> replaceWithMatch;
+    @Getter private List<String> removeField;
 
     /**
      * Gets data spec.
@@ -449,7 +445,7 @@ public class DataFlowConfig {
     public void setReplaceWithType(List<String[]> replaceWithType) {
       this.replaceWithType =
           replaceWithType.stream()
-              .map(strings -> parseArray(strings, 2, "DataTransformerConfig", "ReplaceWithType"))
+              .map(strings -> parseArray(strings, 3, "DataTransformerConfig", "ReplaceWithType"))
               .collect(toList());
     }
 

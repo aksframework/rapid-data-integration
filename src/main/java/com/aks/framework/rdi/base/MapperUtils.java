@@ -19,7 +19,8 @@ public class MapperUtils {
         return BeanUtils.getObjectMapper().readTree(toObject.toString());
       } catch (JsonProcessingException e) {
         Map<String, String> payload = new HashMap<>(1);
-        payload.put(DataFlowConstants.DEFAULT_NODE_NAME_IF_OBJECT_IS_STRING, toObject.toString());
+        payload.put(
+            ApplicationConstants.DEFAULT_NODE_NAME_IF_OBJECT_IS_STRING, toObject.toString());
         return BeanUtils.getObjectMapper().valueToTree(payload);
       }
     } else {
@@ -39,7 +40,7 @@ public class MapperUtils {
       return BeanUtils.getObjectMapper().convertValue(toObject, Map.class);
     } catch (IllegalArgumentException illegalArgumentException) {
       Map<String, String> payload = new HashMap<>(1);
-      payload.put(DataFlowConstants.DEFAULT_NODE_NAME_IF_OBJECT_IS_STRING, toObject.toString());
+      payload.put(ApplicationConstants.DEFAULT_NODE_NAME_IF_OBJECT_IS_STRING, toObject.toString());
       return BeanUtils.getObjectMapper().convertValue(payload, Map.class);
     }
   }
@@ -51,7 +52,7 @@ public class MapperUtils {
       JsonNode child = it.next();
       if (child.isNull()) {
         it.remove();
-      } else if (child.isObject() && (child.isEmpty(null))) {
+      } else if ((child.isArray() || child.isObject()) && child.isEmpty(null)) {
         it.remove();
       } else if (child.isTextual()
           && (ObjectUtils.isEmpty(child.asText()) || child.asText().equals("null"))) {

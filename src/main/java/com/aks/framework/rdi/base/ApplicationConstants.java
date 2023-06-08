@@ -1,7 +1,7 @@
 package com.aks.framework.rdi.base;
 
 /** The type Data flow constants. */
-public class DataFlowConstants {
+public class ApplicationConstants {
   /** The constant API_EXECUTOR_CHANNEL. */
   public static final String API_EXECUTOR_CHANNEL = "APIExecutorChannel";
   /** The constant SPEC_EXECUTOR_CHANNEL. */

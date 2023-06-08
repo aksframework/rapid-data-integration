@@ -1,7 +1,8 @@
 package com.aks.framework.rdi.apiexecutor;
 
-import com.aks.framework.rdi.base.DataFlowConstants;
-import com.aks.framework.rdi.base.DataFlowUtils;
+import static com.aks.framework.rdi.base.RDIUtils.createChannel;
+
+import com.aks.framework.rdi.base.ApplicationConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.integration.dsl.IntegrationFlowDefinition;
 
@@ -22,7 +23,7 @@ public class ConcurrentAPIExecutorFlow extends AbstractAPIExecutorFlow {
   @Override
   public IntegrationFlowDefinition<?> buildFlow() {
     return new APIExecutorDefinition(dataFlowBaseExecutor, dataFlowName)
-        .from(DataFlowUtils.createChannel(dataFlowName, DataFlowConstants.API_EXECUTOR_CHANNEL))
+        .from(createChannel(dataFlowName, ApplicationConstants.API_EXECUTOR_CHANNEL))
         .addConcurrency()
         .transformRequest()
         .executeRequest()

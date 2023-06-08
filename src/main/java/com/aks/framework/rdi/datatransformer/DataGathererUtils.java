@@ -1,10 +1,10 @@
 package com.aks.framework.rdi.datatransformer;
 
-import com.aks.framework.rdi.base.DataFlowConstants;
 import com.bazaarvoice.jolt.common.Optional;
 import com.bazaarvoice.jolt.traversr.SimpleTraversal;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.aks.framework.rdi.base.ApplicationConstants;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,23 +33,23 @@ public class DataGathererUtils {
    * @return the traversal list
    */
   public static List<String> getTraversalList(String traversalPath, Object traversalObject) {
-    if (!traversalPath.contains(DataFlowConstants.ARRAY_RECURSIVE_STRING)) {
+    if (!traversalPath.contains(ApplicationConstants.ARRAY_RECURSIVE_STRING)) {
       return List.of(traversalPath);
     } else {
       List<String> paths =
-          Arrays.stream(traversalPath.split(DataFlowConstants.ARRAY_RECURSIVE_STRING_SPLITTER))
+          Arrays.stream(traversalPath.split(ApplicationConstants.ARRAY_RECURSIVE_STRING_SPLITTER))
               .map(DataGathererUtils::removeUnRequiredChars)
               .collect(Collectors.toList());
 
       List<String> finalTraversalList = new ArrayList<>();
       if (paths.isEmpty()) {
-        paths.add(DataFlowConstants.ARRAY_ZEROTH_ELEMENT);
+        paths.add(ApplicationConstants.ARRAY_ZEROTH_ELEMENT);
       }
       for (String path : paths) {
         if (finalTraversalList.isEmpty()) {
-          finalTraversalList.add(DataFlowConstants.EMPTY_STRING);
+          finalTraversalList.add(ApplicationConstants.EMPTY_STRING);
         } else {
-          path = DataFlowConstants.TRAVERSAL_PATH_DELIMITER + path;
+          path = ApplicationConstants.TRAVERSAL_PATH_DELIMITER + path;
         }
 
         String finalPath = path;
@@ -69,10 +69,10 @@ public class DataGathererUtils {
   }
 
   private static String removeUnRequiredChars(String string) {
-    if (string.endsWith(DataFlowConstants.TRAVERSAL_PATH_DELIMITER)) {
+    if (string.endsWith(ApplicationConstants.TRAVERSAL_PATH_DELIMITER)) {
       string = string.substring(0, string.length() - 1);
     }
-    if (string.startsWith(DataFlowConstants.TRAVERSAL_PATH_DELIMITER)) {
+    if (string.startsWith(ApplicationConstants.TRAVERSAL_PATH_DELIMITER)) {
       string = string.substring(1);
     }
     return string;
@@ -119,7 +119,7 @@ public class DataGathererUtils {
    */
   public static Optional<Object> getObjectFromTraversal(
       String traversalPath, Object objectForTraversal) {
-    if (traversalPath.equals(DataFlowConstants.ROOT_OBJECT_PARENTHESIS)) {
+    if (traversalPath.equals(ApplicationConstants.ROOT_OBJECT_PARENTHESIS)) {
       return Optional.of(objectForTraversal);
     }
     SimpleTraversal<Object> toTraversal = SimpleTraversal.newTraversal(traversalPath);
@@ -209,12 +209,13 @@ public class DataGathererUtils {
         .streamMessages()
         .filter(
             message ->
-                Objects.nonNull(message.getHeaders().get(DataFlowConstants.DATA_FLOW_HEADER_NAME)))
+                Objects.nonNull(
+                    message.getHeaders().get(ApplicationConstants.DATA_FLOW_HEADER_NAME)))
         .collect(
             Collectors.toMap(
                 k ->
                     Objects.requireNonNull(
-                            k.getHeaders().get(DataFlowConstants.DATA_FLOW_HEADER_NAME))
+                            k.getHeaders().get(ApplicationConstants.DATA_FLOW_HEADER_NAME))
                         .toString(),
                 v -> v));
   }

@@ -1,13 +1,12 @@
 package com.aks.framework.rdi.specExecutor;
 
-import static com.aks.framework.rdi.base.DataFlowUtils.createChannel;
-
+import com.aks.framework.rdi.base.ApplicationConstants;
 import com.aks.framework.rdi.base.BeanUtils;
 import com.aks.framework.rdi.base.DataFlowBaseExecutor;
 import com.aks.framework.rdi.base.DataFlowConfig;
-import com.aks.framework.rdi.base.DataFlowConstants;
 import com.aks.framework.rdi.base.DefaultTransformer;
 import com.aks.framework.rdi.base.MapperUtils;
+import com.aks.framework.rdi.base.RDIUtils;
 import java.util.Map;
 import javax.validation.constraints.NotNull;
 import org.springframework.integration.dsl.IntegrationFlowExtension;
@@ -40,8 +39,10 @@ public class SpecExecutorDefinition extends IntegrationFlowExtension<SpecExecuto
         .enrichHeaders(
             h -> {
               h.errorChannel(
-                  createChannel(dataFlowName, DataFlowConstants.SPEC_EXECUTOR_ERROR_CHANNEL), true);
-              h.header(DataFlowConstants.DATA_FLOW_HEADER_NAME, dataFlowName);
+                  RDIUtils.createChannel(
+                      dataFlowName, ApplicationConstants.SPEC_EXECUTOR_ERROR_CHANNEL),
+                  true);
+              h.header(ApplicationConstants.DATA_FLOW_HEADER_NAME, dataFlowName);
             });
   }
 
