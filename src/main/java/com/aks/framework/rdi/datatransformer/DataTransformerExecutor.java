@@ -2,8 +2,6 @@ package com.aks.framework.rdi.datatransformer;
 
 import static com.aks.framework.rdi.datatransformer.DataGathererUtils.convertForTraversal;
 
-import com.bazaarvoice.jolt.common.Optional;
-import com.bazaarvoice.jolt.traversr.SimpleTraversal;
 import com.aks.framework.rdi.base.ApplicationConstants;
 import com.aks.framework.rdi.base.DataFlowConfig.DataTransformerConfig;
 import com.aks.framework.rdi.base.DataFlowConfig.ExpressionTraversalPath;
@@ -11,6 +9,8 @@ import com.aks.framework.rdi.base.DataFlowConfig.MapTraversalPath;
 import com.aks.framework.rdi.base.DataFlowConfig.MatchTraversalPath;
 import com.aks.framework.rdi.base.DataFlowConfig.TraversalPath;
 import com.aks.framework.rdi.base.MapperUtils;
+import com.bazaarvoice.jolt.common.Optional;
+import com.bazaarvoice.jolt.traversr.SimpleTraversal;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -22,9 +22,7 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.util.ObjectUtils;
 
-/**
- * The type Data transformer executor.
- */
+/** The type Data transformer executor. */
 @Slf4j
 public class DataTransformerExecutor {
   private final String dataTransformerName;
@@ -42,7 +40,7 @@ public class DataTransformerExecutor {
    * @param toObject the to object
    * @param fromObject the from object
    */
-public DataTransformerExecutor(
+  public DataTransformerExecutor(
       String dataTransformerName,
       DataTransformerConfig dataTransformerConfig,
       Object toObject,
@@ -58,7 +56,7 @@ public DataTransformerExecutor(
    *
    * @return the object
    */
-public Object execute() {
+  public Object execute() {
     if (!dataTransformerConfig.isInApplication()) {
       executeRemoveField(toObject);
       executeMapWithMatch(toObject, fromObject);
@@ -467,7 +465,8 @@ public Object execute() {
           && mapFromObject.isPresent()) {
         if (matchToObject.get().toString().equals(matchFromObject.get().toString())) {
           ((Map) mapToObject.get()).put(mapWithObjectName, "-");
-          getTraversal(mapToObjectPath + "." + mapWithObjectName).set(toObject, mapFromObject.get());
+          getTraversal(mapToObjectPath + "." + mapWithObjectName)
+              .set(toObject, mapFromObject.get());
           log.info(
               "Transformed -> transformer[{}] [map-with-match] for[{}-{}-{}] Result[{}]",
               dataTransformerName,

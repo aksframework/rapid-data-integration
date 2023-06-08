@@ -1,10 +1,10 @@
 package com.aks.framework.rdi.datagatherer;
 
-import com.bazaarvoice.jolt.common.Optional;
-import com.bazaarvoice.jolt.traversr.SimpleTraversal;
 import com.aks.framework.rdi.base.ApplicationConstants;
 import com.aks.framework.rdi.base.DataFlowConfig.PlaceHolder;
 import com.aks.framework.rdi.datatransformer.DataGathererUtils;
+import com.bazaarvoice.jolt.common.Optional;
+import com.bazaarvoice.jolt.traversr.SimpleTraversal;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;

@@ -1,6 +1,5 @@
 package com.aks.framework.rdi.datagatherer;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.aks.framework.rdi.annotations.DataFlowGatherer;
 import com.aks.framework.rdi.base.ApplicationConstants;
 import com.aks.framework.rdi.base.BeanUtils;
@@ -12,6 +11,7 @@ import com.aks.framework.rdi.base.MapperUtils;
 import com.aks.framework.rdi.datatransformer.DataGathererUtils;
 import com.aks.framework.rdi.datatransformer.DataTransformerExecutor;
 import com.aks.framework.rdi.datatransformer.InApplicationDataTransformer;
+import com.fasterxml.jackson.databind.JsonNode;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
