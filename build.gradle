@@ -28,52 +28,26 @@ repositories {
 	mavenCentral()
 }
 
-def lombok_version = '1.18.12'
-def flogger_version = '0.6'
-def spring_cloud_gcp_version = '3.2.0'
-
-
 dependencies {
-	// Spring Boot's web application support
-	implementation("org.springframework.boot:spring-boot-starter-integration:${spring_boot_version}")
-	implementation("org.springframework.integration:spring-integration-http:5.5.10")
-	implementation("org.springframework.boot:spring-boot-starter-log4j2:${spring_boot_version}")
+	api 'org.springframework.integration:spring-integration-http:5.5.10'
+	api 'org.springframework.boot:spring-boot-starter-data-jpa'
+	api 'com.bazaarvoice.jolt:jolt-core:0.1.7'
+	api 'com.bazaarvoice.jolt:jolt-parent:0.1.7'
+	api 'com.bazaarvoice.jolt:json-utils:0.1.7'
+	api "com.jayway.jsonpath:json-path:2.7.0"
+	api 'org.aspectj:aspectjrt:1.9.7'
 
-	//Dependency require to run in-build demo
-	implementation('org.springframework.boot:spring-boot-starter-web')
-	
-	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
-	runtimeOnly 'com.h2database:h2'
+	implementation 'com.github.ben-manes.caffeine:caffeine:3.1.5'
+	implementation 'javax.validation:validation-api:2.0.1.Final'
+	implementation 'com.google.code.findbugs:jsr305:3.0.2'
 
-	implementation 'com.bazaarvoice.jolt:jolt-core:0.1.7'
-	implementation 'com.bazaarvoice.jolt:jolt-parent:0.1.7'
-	implementation 'com.bazaarvoice.jolt:json-utils:0.1.7'
-	implementation("com.jayway.jsonpath:json-path:2.7.0")
-	implementation('com.github.ben-manes.caffeine:caffeine:3.1.5')
-
-
-	compileOnly('org.projectlombok:lombok')
-	implementation("javax.validation:validation-api:2.0.1.Final")
-	implementation('org.aspectj:aspectjrt:1.9.7')
-
+	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor "org.projectlombok:lombok"
-}
-
-configurations.all {
-	exclude module: "spring-boot-starter-logging"
-	exclude module: "logback-classic"
-
-	resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-		if (details.requested.group == 'org.apache.logging.log4j') {
-			details.useVersion '2.17.1'
-		}
-	}
 }
 
 tasks.withType(JavaCompile) {
 	options.encoding = "UTF-8"
 }
-
 
 test {
 	useJUnitPlatform()
@@ -83,7 +57,6 @@ group = "com.aks.framework"
 version = "0.0.1-SNAPSHOT"
 sourceCompatibility = "11"
 targetCompatibility = "11"
-
 
 jar {
 	enabled = true
