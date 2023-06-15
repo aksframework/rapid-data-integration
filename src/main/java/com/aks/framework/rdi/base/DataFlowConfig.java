@@ -39,6 +39,8 @@ public class DataFlowConfig {
 
   private Map<String, WebClientConfig> webClientProfile;
 
+  private Map<String, ThreadExecutorConfig> threadExecutorProfile;
+
   private Map<String, RetryData> retryProfile;
 
   private Map<String, APIExecutorConfig> dataFlowAPIExecutor;
@@ -55,6 +57,12 @@ public class DataFlowConfig {
 
   public WebClientConfig getWebClientByProfile(String profileName) {
     return ObjectUtils.isEmpty(webClientProfile) ? null : webClientProfile.get(profileName);
+  }
+
+  public ThreadExecutorConfig getThreadExecutorByProfile(String profileName) {
+    return ObjectUtils.isEmpty(threadExecutorProfile)
+        ? null
+        : threadExecutorProfile.get(profileName);
   }
 
   /**
@@ -123,6 +131,15 @@ public class DataFlowConfig {
     private DataFlowProxy dataFlowProxy;
   }
 
+  @Getter
+  @Setter
+  public static class ThreadExecutorConfig {
+    private int queueCapacity;
+    private int initialPoolSize;
+    private int maximumPoolSize;
+    private int threadKeepAliveTime;
+  }
+
   /** The type Data flow proxy. */
   @Getter
   @Setter
@@ -158,6 +175,7 @@ public class DataFlowConfig {
     private String apiUrl;
     private String retryProfile;
     private String webClientProfile = "default";
+    private String threadExecutorProfile;
     private String httpMethod;
     private String requestSpec;
     private String responseSpec;

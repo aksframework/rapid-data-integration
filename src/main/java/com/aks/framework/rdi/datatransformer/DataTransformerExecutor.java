@@ -467,7 +467,8 @@ public Object execute() {
           && mapFromObject.isPresent()) {
         if (matchToObject.get().toString().equals(matchFromObject.get().toString())) {
           ((Map) mapToObject.get()).put(mapWithObjectName, "-");
-          getTraversal(mapToObjectPath + "." + mapWithObjectName).set(toObject, mapFromObject.get());
+          getTraversal(mapToObjectPath + "." + mapWithObjectName)
+              .set(toObject, mapFromObject.get());
           log.info(
               "Transformed -> transformer[{}] [map-with-match] for[{}-{}-{}] Result[{}]",
               dataTransformerName,

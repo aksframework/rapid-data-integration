@@ -140,7 +140,9 @@ public abstract class AbstractDataFlowGatherer extends AbstractBaseDataFlowGathe
                         transformerName, dataTransformerConfigObject, toDataObject, fromDataObject)
                     .execute();
             if (DataGathererUtils.isFileBasedSpec(
-                dataTransformerConfigObject.getDataSpec().getToSpec())) {
+                    dataTransformerConfigObject.getDataSpec().getToSpec())
+                || DataGathererUtils.isFileBasedSpec(
+                    dataTransformerConfigObject.getDataSpec().getFromSpec())) {
               collectedDataMap.put(transformerName, transformed);
             } else {
               collectedDataMap.put(

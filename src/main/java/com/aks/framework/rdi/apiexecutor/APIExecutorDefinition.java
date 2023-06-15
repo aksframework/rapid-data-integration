@@ -4,8 +4,12 @@ import static com.aks.framework.rdi.base.ApplicationConstants.SPEC_TYPE.REQUEST;
 import static com.aks.framework.rdi.base.ApplicationConstants.SPEC_TYPE.RESPONSE;
 import static com.aks.framework.rdi.base.MapperUtils.convertToJson;
 import static com.aks.framework.rdi.base.RDIUtils.createChannel;
+import static com.aks.framework.rdi.base.RDIUtils.executorName;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.aks.framework.rdi.annotations.OnRequest;
 import com.aks.framework.rdi.annotations.RequestTransformer;
 import com.aks.framework.rdi.annotations.ResponseTransformer;
@@ -27,10 +31,10 @@ import com.aks.framework.rdi.datatransformer.PayloadTransformer;
 import com.aks.framework.rdi.retry.DefaultRequestRetryAdvice.DefaultRequestRetryAdviceBuilder;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.Executors;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import javax.validation.constraints.NotNull;
@@ -73,7 +77,23 @@ public class APIExecutorDefinition extends IntegrationFlowExtension<APIExecutorD
   }
 
   public JsonNode aggregatePayload(@NotNull List<JsonNode> payloads) {
-    return convertToJson(Map.of(dataFlowName, payloads));
+    ArrayNode arrayNode = JsonNodeFactory.instance.arrayNode();
+    payloads.forEach(
+        jsonNode -> {
+          if (jsonNode.isArray()) {
+            Iterator<JsonNode> elements = jsonNode.elements();
+            while (elements.hasNext()) {
+              arrayNode.add(elements.next());
+            }
+          }
+        });
+    if (arrayNode.size() == 0) {
+      return convertToJson(Map.of(dataFlowName, payloads));
+    } else {
+      ObjectNode objectNode = JsonNodeFactory.instance.objectNode();
+      objectNode.put(dataFlowName, arrayNode);
+      return objectNode;
+    }
   }
 
   public APIExecutorDefinition transformRequest() {
@@ -195,7 +215,11 @@ public class APIExecutorDefinition extends IntegrationFlowExtension<APIExecutorD
   public APIExecutorDefinition addConcurrency() {
     return transformToJsonNode()
         .split(dataFlowBaseExecutor)
-        .channel(MessageChannels.executor(Executors.newCachedThreadPool()))
+        .channel(
+            MessageChannels.executor(
+                executorName(dataFlowName),
+                BeanUtils.getConcurrentAPIThreadExecutor(
+                    apiExecutorConfig.getThreadExecutorProfile())))
         .transformToJsonNode()
         .enrichHeaders(
             h -> {
@@ -335,7 +359,10 @@ public class APIExecutorDefinition extends IntegrationFlowExtension<APIExecutorD
     String responseText = String.format("API-Flow [%s:%s] <-", httpMethod, dataFlowName);
 
     APIExecutorDefinition logRequest =
-        log(requestText, message -> "Headers:[" + message.getHeaders() + "] Payload:[" + message.getPayload() + "]");
+        log(
+            requestText,
+            message ->
+                "Headers:[" + message.getHeaders() + "] Payload:[" + message.getPayload() + "]");
 
     if (dataFlowBaseExecutor instanceof AddGatewayHandler) {
       return logRequest

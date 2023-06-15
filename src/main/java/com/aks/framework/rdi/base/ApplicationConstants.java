@@ -17,6 +17,8 @@ public class ApplicationConstants {
   /** The constant DATA_FLOW_HEADER_NAME. */
   public static final String DATA_FLOW_HEADER_NAME = "DataFlow";
 
+  public static final String API_EXECUTOR_TEXT = "ThreadExecutor";
+
   /** The constant ORIGINAL_ERROR_CHANNEL. */
   public static final String ORIGINAL_ERROR_CHANNEL = "originalErrorChannel";
   /** The constant RETRY_PROFILE. */
@@ -44,6 +46,10 @@ public class ApplicationConstants {
 
   public static final int DEFAULT_CONNECT_TIMEOUT = 10000;
   public static final int DEFAULT_READ_TIMEOUT = 10000;
+  public static final int DEFAULT_THREAD_EXECUTOR_QUEUE_CAPACITY = 1000;
+  public static final int DEFAULT_THREAD_EXECUTOR_INITIAL_POOL_SIZE = 5;
+  public static final int DEFAULT_THREAD_EXECUTOR_MAXIMUM_POOL_SIZE = 20;
+  public static final long DEFAULT_THREAD_EXECUTOR_THREAD_KEEP_ALIVE_TIME = 20;
 
   public enum SPEC_TYPE {
     REQUEST,

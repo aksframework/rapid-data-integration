@@ -1,8 +1,11 @@
 package com.aks.framework.rdi.base;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.aks.framework.rdi.apiexecutor.custom.RequestOverrideTransformer;
+import com.aks.framework.rdi.base.DataFlowConfig.ThreadExecutorConfig;
 import com.aks.framework.rdi.base.DataFlowConfig.WebClientConfig;
 import com.aks.framework.rdi.datatransformer.InApplicationDataTransformer;
 import java.net.InetSocketAddress;
@@ -10,6 +13,10 @@ import java.net.Proxy;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.ThreadPoolExecutor.AbortPolicy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -176,5 +183,34 @@ public class BeanUtils {
   public static void addExecutor(
       String executorName, Class<? extends AbstractBaseExecutor> executorClass) {
     executorBeanDictionary.put(executorName, executorClass);
+  }
+
+  public static Executor getConcurrentAPIThreadExecutor(String threadExecutorProfile) {
+    getDataFlowConfig();
+    Optional<ThreadExecutorConfig> threadExecutorByProfile =
+        Optional.ofNullable(dataFlowConfig.getThreadExecutorByProfile(threadExecutorProfile));
+
+    if (threadExecutorByProfile.isPresent()) {
+      ThreadExecutorConfig threadExecutorConfig = threadExecutorByProfile.get();
+      ArrayBlockingQueue<Runnable> boundedQueue =
+          new ArrayBlockingQueue<>(threadExecutorConfig.getQueueCapacity());
+      return new ThreadPoolExecutor(
+          threadExecutorConfig.getInitialPoolSize(),
+          threadExecutorConfig.getMaximumPoolSize(),
+          threadExecutorConfig.getThreadKeepAliveTime(),
+          SECONDS,
+          boundedQueue,
+          new AbortPolicy());
+    } else {
+      ArrayBlockingQueue<Runnable> boundedQueue =
+          new ArrayBlockingQueue<>(ApplicationConstants.DEFAULT_THREAD_EXECUTOR_QUEUE_CAPACITY);
+      return new ThreadPoolExecutor(
+          ApplicationConstants.DEFAULT_THREAD_EXECUTOR_INITIAL_POOL_SIZE,
+          ApplicationConstants.DEFAULT_THREAD_EXECUTOR_MAXIMUM_POOL_SIZE,
+          ApplicationConstants.DEFAULT_THREAD_EXECUTOR_THREAD_KEEP_ALIVE_TIME,
+          SECONDS,
+          boundedQueue,
+          new AbortPolicy());
+    }
   }
 }
